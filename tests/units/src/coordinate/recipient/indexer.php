@@ -2,7 +2,7 @@
 
 require __DIR__ . '/../../../runner.php';
 
-use estvoyage\ticTacToe\tests\units;
+use estvoyage\ticTacToe\{ tests\units, block };
 use mock\estvoyage\ticTacToe as mockOfTicTacToe;
 
 class indexer extends units\test
@@ -11,6 +11,22 @@ class indexer extends units\test
 	{
 		$this->testedClass
 			->implements('estvoyage\ticTacToe\coordinate\recipient')
+		;
+	}
+
+	function test__construct()
+	{
+		$this
+			->given(
+				$width = rand(PHP_INT_MIN, PHP_INT_MAX),
+				$height = rand(PHP_INT_MIN, PHP_INT_MAX),
+				$blockForKey = new mockOfTicTacToe\block
+			)
+			->if(
+				$this->newTestedInstance($width, $height, $blockForKey)
+			)
+			->then
+				->object($this->testedInstance)->isEqualTo($this->newTestedInstance($width, $height, $blockForKey, new block\blackhole))
 		;
 	}
 

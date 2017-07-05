@@ -28,8 +28,7 @@ class x3
 				{
 					$recipient->ticTacToeSymbolIs($this->symbols[$key]);
 				}
-			),
-			new block\blackhole
+			)
 		);
 	}
 
@@ -73,7 +72,7 @@ class x3
 		);
 	}
 
-	private static function keyBlockAndInvalidBlockForCoordinateIs(coordinate $coordinate, block $keyBlock, block $invalidBlock)
+	private static function keyBlockAndInvalidBlockForCoordinateIs(coordinate $coordinate, block $keyBlock, block $invalidBlock = null)
 	{
 		$coordinate
 			->recipientOfLineAndColumnIs(

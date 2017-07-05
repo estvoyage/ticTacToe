@@ -13,12 +13,12 @@ class indexer
 		$blockForInvalidLineOrColumn
 	;
 
-	function __construct(int $width, int $height, block $blockForKey, block $blockForInvalidLineOrColumn)
+	function __construct(int $width, int $height, block $blockForKey, block $blockForInvalidLineOrColumn = null)
 	{
 		$this->width = $width;
 		$this->height = $height;
 		$this->blockForKey = $blockForKey;
-		$this->blockForInvalidLineOrColumn = $blockForInvalidLineOrColumn;
+		$this->blockForInvalidLineOrColumn = $blockForInvalidLineOrColumn ?: new block\blackhole;
 	}
 
 	function lineAndColumnOfTicTacToeSymbolIs(int $line, int $column) :void
