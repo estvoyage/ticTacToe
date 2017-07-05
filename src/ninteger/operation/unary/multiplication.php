@@ -2,26 +2,10 @@
 
 use estvoyage\ticTacToe\{ ninteger, block };
 
-class multiplication extends ninteger\filter\type
-	implements
-		ninteger\operation\unary
+class multiplication extends any
 {
-	private
-		$ninteger1
-	;
-
 	function __construct(int $ninteger1, block $overflow = null)
 	{
-		parent::__construct($overflow);
-
-		$this->ninteger1 = $ninteger1;
-	}
-
-	function recipientOfOperationWithNIntegerIs(int $ninteger, ninteger\recipient $recipient) :void
-	{
-		parent::nIntegerRecipientForValueIs(
-			$this->ninteger1 * $ninteger,
-			$recipient
-		);
+		parent::__construct($ninteger1, new ninteger\operation\binary\multiplication($overflow));
 	}
 }

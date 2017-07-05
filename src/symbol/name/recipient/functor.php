@@ -1,29 +1,11 @@
 <?php namespace estvoyage\ticTacToe\symbol\name\recipient;
 
-use estvoyage\ticTacToe\{ symbol, block };
+use estvoyage\ticTacToe;
 
-class functor
-	implements
-		symbol\name\recipient
+class functor extends block
 {
-	private
-		$callableForX,
-		$callableForO
-	;
-
 	function __construct(callable $callableForX, callable $callableForO)
 	{
-		$this->callableForX = $callableForX;
-		$this->callableForO = $callableForO;
-	}
-
-	function ticTacToeSymbolIsX() :void
-	{
-		call_user_func($this->callableForX);
-	}
-
-	function ticTacToeSymbolIsO() :void
-	{
-		call_user_func($this->callableForO);
+		parent::__construct(new ticTacToe\block\functor($callableForX), new ticTacToe\block\functor($callableForO));
 	}
 }

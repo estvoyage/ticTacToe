@@ -20,7 +20,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "estvoyage\\ticTacToe\\tests\\units\\providers\\": "tests/units/providers",
+            "estvoyage\\ticTacToe\\tests\\units\\data\\provider\\": "tests/units/data/provider",
             "estvoyage\\ticTacToe\\tests\\units\\": "tests/units/src"
         }
     }

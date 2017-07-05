@@ -1,13 +1,11 @@
 <?php namespace estvoyage\ticTacToe\coordinate\recipient;
 
-use estvoyage\ticTacToe\{ coordinate, block };
+use estvoyage\ticTacToe;
 
-class functor extends block\functor
-	implements
-		coordinate\recipient
+class functor extends block
 {
-	function lineAndColumnOfTicTacToeSymbolIs(int $line, int $column) :void
+	function __construct(callable $callable)
 	{
-		parent::blockArgumentsAre($line, $column);
+		parent::__construct(new ticTacToe\block\functor($callable));
 	}
 }

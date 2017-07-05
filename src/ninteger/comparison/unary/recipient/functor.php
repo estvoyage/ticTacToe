@@ -1,13 +1,11 @@
 <?php namespace estvoyage\ticTacToe\ninteger\comparison\unary\recipient;
 
-use estvoyage\ticTacToe\{ ninteger, block };
+use estvoyage\ticTacToe;
 
-class functor extends block\functor
-	implements
-		ninteger\comparison\unary\recipient
+class functor extends block
 {
-	function comparisonWithNIntegerIs(int $ninteger, bool $boolean) :void
+	function __construct(callable $callable)
 	{
-		parent::blockArgumentsAre($ninteger, $boolean);
+		parent::__construct(new ticTacToe\block\functor($callable));
 	}
 }

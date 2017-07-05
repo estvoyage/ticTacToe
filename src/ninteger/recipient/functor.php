@@ -1,13 +1,11 @@
 <?php namespace estvoyage\ticTacToe\ninteger\recipient;
 
-use estvoyage\ticTacToe\{ ninteger, block };
+use estvoyage\ticTacToe;
 
-class functor extends block\functor
-	implements
-		ninteger\recipient
+class functor extends block
 {
-	function nintegerIs(int $ninteger) :void
+	function __construct(callable $callable)
 	{
-		parent::blockArgumentsAre($ninteger);
+		parent::__construct(new ticTacToe\block\functor($callable));
 	}
 }

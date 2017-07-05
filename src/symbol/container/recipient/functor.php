@@ -1,13 +1,11 @@
 <?php namespace estvoyage\ticTacToe\symbol\container\recipient;
 
-use estvoyage\ticTacToe\{ symbol, block };
+use estvoyage\ticTacToe;
 
-class functor extends block\functor
-	implements
-		symbol\container\recipient
+class functor extends block
 {
-	function ticTacToeSymbolContainerIs(symbol\container $container) :void
+	function __construct(callable $callable)
 	{
-		parent::blockArgumentsAre($container);
+		parent::__construct(new ticTacToe\block\functor($callable));
 	}
 }

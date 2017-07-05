@@ -1,13 +1,11 @@
 <?php namespace estvoyage\ticTacToe\nboolean\recipient\recipient;
 
-use estvoyage\ticTacToe\{ nboolean, block };
+use estvoyage\ticTacToe;
 
-class functor extends block\functor
-	implements
-		nboolean\recipient\recipient
+class functor extends block
 {
-	function nbooleanRecipientIs(nboolean\recipient $recipient) :void
+	function __construct(callable $callable)
 	{
-		parent::blockArgumentsAre($recipient);
+		parent::__construct(new ticTacToe\block\functor($callable));
 	}
 }
