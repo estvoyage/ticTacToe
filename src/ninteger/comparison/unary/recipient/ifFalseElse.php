@@ -2,27 +2,12 @@
 
 use estvoyage\ticTacToe\{ ninteger, nboolean, block };
 
-class ifFalseElse extends nboolean\recipient\ifTrueElse
+class ifFalseElse extends ninteger\comparison\unary\recipient\condition
 	implements
 		ninteger\comparison\unary\recipient
 {
 	function __construct(block $false, block $true)
 	{
-		parent::__construct($true, $false);
-	}
-
-	function comparisonWithNIntegerIs(int $ninteger, bool $boolean) :void
-	{
-		$this
-			->recipientOfNBooleanRecipientWithArgumentsIs(
-				[ $ninteger ],
-				new nboolean\recipient\recipient\functor(
-					function($self) use ($boolean)
-					{
-						$self->nbooleanIs($boolean);
-					}
-				)
-			)
-		;
+		parent::__construct(new nboolean\recipient\ifTrueElse($true, $false));
 	}
 }

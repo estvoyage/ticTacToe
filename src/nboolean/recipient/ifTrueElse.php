@@ -24,7 +24,7 @@ class ifTrueElse
 		($bool ? $this->true : $this->false)->blockArgumentsAre(... $this->arguments);
 	}
 
-	function recipientOfNBooleanRecipientWithArgumentsIs(array $arguments, recipient $recipient)
+	function recipientOfNBooleanRecipientWithArgumentsIs(array $arguments, recipient $recipient) :void
 	{
 		$self = clone $this;
 		$self->arguments = $arguments;
