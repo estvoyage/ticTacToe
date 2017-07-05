@@ -10,7 +10,7 @@ class ifTrueElse extends units\test
 	function testClass()
 	{
 		$this->testedClass
-			->implements('estvoyage\ticTacToe\nboolean\recipient')
+			->implements('estvoyage\ticTacToe\nboolean\recipient\withArguments')
 		;
 	}
 

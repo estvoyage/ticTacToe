@@ -37,6 +37,29 @@ class between extends units\test
 		;
 	}
 
+	/**
+	 * @dataProvider upDownNIntegerAndBooleanProvider
+	 */
+	function testRecipientOfComparisonWithNIntegerIsNBooleanRecipient($up, $down, $ninteger, $boolean)
+	{
+		$this
+			->given(
+				$this->newTestedInstance($up, $down),
+				$recipient = new mockOfTicTacToe\nboolean\recipient
+			)
+			->if(
+				$this->testedInstance->recipientOfComparisonWithNIntegerIsNBooleanRecipient($ninteger, $recipient)
+			)
+			->then
+				->object($this->testedInstance)
+					->isEqualTo($this->newTestedInstance($up, $down))
+				->mock($recipient)
+					->receive('nbooleanIs')
+						->withArguments($boolean)
+							->once
+		;
+	}
+
 	protected function upDownNIntegerAndBooleanProvider()
 	{
 		return [

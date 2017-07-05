@@ -4,7 +4,7 @@ use estvoyage\ticTacToe\{ nboolean, block };
 
 class ifTrueElse
 	implements
-		nboolean\recipient
+		nboolean\recipient\withArguments
 {
 	private
 		$true,

@@ -18,7 +18,7 @@ class condition extends units\test
 	{
 		$this
 			->given(
-				$this->newTestedInstance($condition = new mockOfTicTacToe\nboolean\recipient),
+				$this->newTestedInstance($condition = new mockOfTicTacToe\nboolean\recipient\withArguments),
 				$ninteger = rand(PHP_INT_MIN, PHP_INT_MAX),
 				$boolean = rand(0, 1) == 1,
 
