@@ -27,7 +27,7 @@ class type extends units\test
 		$this
 			->given(
 				$this->newTestedInstance($block = new mockOfTicTacToe\block),
-				$recipient = new mockOfTicTacToe\nInteger\recipient
+				$recipient = new mockOfTicTacToe\ninteger\recipient
 			)
 			->if(
 				$this->testedInstance->nIntegerRecipientForValueIs($value, $recipient)
@@ -51,7 +51,7 @@ class type extends units\test
 		$this
 			->given(
 				$this->newTestedInstance($block = new mockOfTicTacToe\block),
-				$recipient = new mockOfTicTacToe\nInteger\recipient
+				$recipient = new mockOfTicTacToe\ninteger\recipient
 			)
 			->if(
 				$this->testedInstance->nIntegerRecipientForValueIs($value, $recipient)

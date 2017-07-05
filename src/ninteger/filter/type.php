@@ -20,7 +20,10 @@ class type
 		(
 			new nboolean\recipient\ifTrueElse(
 				new block\functor(
-					function() use ($recipient, $value) { $recipient->nintegerIs($value); }
+					function() use ($recipient, $value)
+					{
+						$recipient->nintegerIs($value);
+					}
 				),
 				$this->false
 			)
