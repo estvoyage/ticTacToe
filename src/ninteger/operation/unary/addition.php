@@ -2,30 +2,26 @@
 
 use estvoyage\ticTacToe\{ ninteger, block };
 
-class addition
+class addition extends ninteger\filter\type
 	implements
 		ninteger\operation\unary
 {
 	private
-		$ninteger1,
-		$overflow
+		$ninteger1
 	;
 
 	function __construct(int $ninteger1, block $overflow = null)
 	{
+		parent::__construct($overflow);
+
 		$this->ninteger1 = $ninteger1;
-		$this->overflow = $overflow ?: new block\blackhole;
 	}
 
 	function recipientOfOperationWithNIntegerIs(int $ninteger, ninteger\recipient $recipient) :void
 	{
-		$operation = $this->ninteger1 + $ninteger;
-
-		is_int($operation)
-			?
-			$recipient->nintegerIs($operation)
-			:
-			$this->overflow->blockArgumentsAre()
-		;
+		parent::nIntegerRecipientForValueIs(
+			$this->ninteger1 + $ninteger,
+			$recipient
+		);
 	}
 }

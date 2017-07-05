@@ -7,6 +7,13 @@ use mock\estvoyage\ticTacToe as mockOfTicTacToe;
 
 class between extends units\test
 {
+	function testClass()
+	{
+		$this->testedClass
+			->implements('estvoyage\ticTacToe\ninteger\comparison\unary')
+		;
+	}
+
 	/**
 	 * @dataProvider upDownNIntegerAndBooleanProvider
 	 */
@@ -15,7 +22,7 @@ class between extends units\test
 		$this
 			->given(
 				$this->newTestedInstance($up, $down),
-				$recipient = new mockOfTicTacToe\nboolean\recipient
+				$recipient = new mockOfTicTacToe\ninteger\comparison\unary\recipient
 			)
 			->if(
 				$this->testedInstance->recipientOfComparisonWithNIntegerIs($ninteger, $recipient)
@@ -24,8 +31,8 @@ class between extends units\test
 				->object($this->testedInstance)
 					->isEqualTo($this->newTestedInstance($up, $down))
 				->mock($recipient)
-					->receive('nbooleanIs')
-						->withArguments($boolean)
+					->receive('comparisonWithNIntegerIs')
+						->withArguments($ninteger, $boolean)
 							->once
 		;
 	}
@@ -35,7 +42,8 @@ class between extends units\test
 		return [
 			[ PHP_INT_MIN, PHP_INT_MAX, rand(PHP_INT_MIN + 1, PHP_INT_MAX - 1), true ],
 			[ 0, PHP_INT_MAX, rand(PHP_INT_MIN, - 1), false ],
-			[ rand(PHP_INT_MIN, - 1), -1, rand(0, PHP_INT_MAX), false ]
+			[ rand(PHP_INT_MIN, - 1), -1, rand(0, PHP_INT_MAX), false ],
+			[ 0, 8, -8, false ]
 		];
 	}
 }

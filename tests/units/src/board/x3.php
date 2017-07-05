@@ -127,17 +127,19 @@ class x3 extends units\test
 	{
 		$this
 			->given(
-				$this->newTestedInstance(
-					$l0c0 = new mockOfTicTacToe\symbol,
-					$l0c1 = new mockOfTicTacToe\symbol,
-					$l0c2 = new mockOfTicTacToe\symbol,
-					$l1c0 = new mockOfTicTacToe\symbol,
-					$l1c1 = new mockOfTicTacToe\symbol,
-					$l1c2 = new mockOfTicTacToe\symbol,
-					$l2c0 = new mockOfTicTacToe\symbol,
-					$l2c1 = new mockOfTicTacToe\symbol,
-					$l2c2 = new mockOfTicTacToe\symbol
-				),
+				$symbols = [
+					new mockOfTicTacToe\symbol,
+					new mockOfTicTacToe\symbol,
+					new mockOfTicTacToe\symbol,
+					new mockOfTicTacToe\symbol,
+					new mockOfTicTacToe\symbol,
+					new mockOfTicTacToe\symbol,
+					new mockOfTicTacToe\symbol,
+					new mockOfTicTacToe\symbol,
+					new mockOfTicTacToe\symbol
+				],
+
+				$this->newTestedInstance(... $symbols),
 
 				$coordinate = new mockOfTicTacToe\coordinate,
 				$this->calling($coordinate)->recipientOfLineAndColumnIs = function($recipient) use ($line, $column) {
@@ -153,18 +155,7 @@ class x3 extends units\test
 			)
 			->then
 				->object($this->testedInstance)
-					->isEqualTo($this->newTestedInstance(
-							$l0c0,
-							$l0c1,
-							$l0c2,
-							$l1c0,
-							$l1c1,
-							$l1c2,
-							$l2c0,
-							$l2c1,
-							$l2c2
-						)
-					)
+					->isEqualTo($this->newTestedInstance(... $symbols))
 				->mock($recipient)
 					->receive('invalidCoordinateForTicTacToeSymbol')
 						->withArguments($coordinate, $symbol)
@@ -255,7 +246,7 @@ class x3 extends units\test
 	protected function invalidLineAndColumnProvider()
 	{
 		return [
-			[ - rand(0, 2), - rand(0, 2) ],
+			[ - rand(1, 2), - rand(1, 2) ],
 			[ rand(3, PHP_INT_MAX), rand(3, PHP_INT_MAX) ],
 			[ rand(PHP_INT_MIN, -1), rand(PHP_INT_MIN, -1) ],
 			[ PHP_INT_MIN, PHP_INT_MIN ],

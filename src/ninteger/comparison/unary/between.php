@@ -1,8 +1,10 @@
 <?php namespace estvoyage\ticTacToe\ninteger\comparison\unary;
 
-use estvoyage\ticTacToe\nboolean;
+use estvoyage\ticTacToe\ninteger;
 
 class between
+	implements
+		ninteger\comparison\unary
 {
 	private
 		$down,
@@ -15,8 +17,8 @@ class between
 		$this->up = $up;
 	}
 
-	function recipientOfComparisonWithNIntegerIs(int $ninteger, nboolean\recipient $recipient) :void
+	function recipientOfComparisonWithNIntegerIs(int $ninteger, ninteger\comparison\unary\recipient $recipient) :void
 	{
-		$recipient->nbooleanIs($ninteger >= $this->down && $ninteger <= $this->up);
+		$recipient->comparisonWithNIntegerIs($ninteger, $ninteger >= $this->down && $ninteger <= $this->up);
 	}
 }
