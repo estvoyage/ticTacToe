@@ -21,9 +21,9 @@ class x3
 
 	function recipientOfTicTacToeSymbolAtCoordinateIs(coordinate $coordinate, symbol\recipient $recipient) :void
 	{
-		self::overflowForRecipientOfKeyFromCoordinateIs(
+		self::keyBlockAndInvalidBlockForCoordinateIs(
 			$coordinate,
-			new ninteger\comparison\unary\recipient\ifTrue(
+			new block\functor(
 				function($key) use ($recipient)
 				{
 					$recipient->ticTacToeSymbolIs($this->symbols[$key]);
@@ -35,42 +35,34 @@ class x3
 
 	function recipientOfTicTacToeBoardWithSymbolAtCoordinateIs(symbol $symbol, coordinate $coordinate, board\recipient $recipient) :void
 	{
-		self::overflowForRecipientOfKeyFromCoordinateIs(
+		self::keyBlockAndInvalidBlockForCoordinateIs(
 			$coordinate,
-			new ninteger\comparison\unary\recipient\ifFalseElse(
-				new block\functor(
-					function() use ($recipient, $coordinate, $symbol)
-					{
-						$recipient->invalidCoordinateForTicTacToeSymbol($coordinate, $symbol);
-					}
-				),
-				new block\functor(
-					function($key) use ($recipient, $coordinate, $symbol)
-					{
-						(new symbol\comparison\unary\name\undefined)
-							->recipientOfComparisonWithTicTacToeSymbolIs(
-								$this->symbols[$key],
-								new nboolean\recipient\ifTrueElse(
-									new block\functor(
-										function() use ($recipient, $symbol, $key)
-										{
-											$board = clone $this;
-											$board->symbols[$key] = $symbol;
+			new block\functor(
+				function($key) use ($recipient, $coordinate, $symbol)
+				{
+					(new symbol\comparison\unary\name\undefined)
+						->recipientOfComparisonWithTicTacToeSymbolIs(
+							$this->symbols[$key],
+							new nboolean\recipient\ifTrueElse(
+								new block\functor(
+									function() use ($recipient, $symbol, $key)
+									{
+										$board = clone $this;
+										$board->symbols[$key] = $symbol;
 
-											$recipient->ticTacToeBoardIs($board);
-										}
-									),
-									new block\functor(
-										function() use ($recipient, $coordinate, $symbol)
-										{
-											$recipient->overlapCoordinateForTicTacToeSymbol($coordinate, $symbol);
-										}
-									)
+										$recipient->ticTacToeBoardIs($board);
+									}
+								),
+								new block\functor(
+									function() use ($recipient, $coordinate, $symbol)
+									{
+										$recipient->overlapCoordinateForTicTacToeSymbol($coordinate, $symbol);
+									}
 								)
 							)
-						;
-					}
-				)
+						)
+					;
+				}
 			),
 			new block\functor(
 				function() use ($recipient, $coordinate, $symbol)
@@ -81,29 +73,11 @@ class x3
 		);
 	}
 
-	private static function overflowForRecipientOfKeyFromCoordinateIs(coordinate $coordinate, ninteger\comparison\unary\recipient $recipient, block $overflow) :void
+	private static function keyBlockAndInvalidBlockForCoordinateIs(coordinate $coordinate, block $keyBlock, block $invalidBlock)
 	{
 		$coordinate
 			->recipientOfLineAndColumnIs(
-				new coordinate\recipient\functor(
-					function($line, $column) use ($recipient, $overflow)
-					{
-						(
-							new ninteger\operation\unary\collection(
-								new ninteger\operation\unary\multiplication(3, $overflow),
-								new ninteger\operation\unary\addition($column, $overflow)
-							)
-						)
-							->recipientOfOperationWithNIntegerIs(
-								$line,
-								new ninteger\recipient\comparison\unary(
-									new ninteger\comparison\unary\between(0, 8),
-									$recipient
-								)
-							)
-						;
-					}
-				)
+				new coordinate\recipient\indexer(3, 3, $keyBlock, $invalidBlock)
 			)
 		;
 	}
