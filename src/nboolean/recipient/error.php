@@ -29,8 +29,4 @@ class error
 			->nbooleanIs($boolean)
 		;
 	}
-
-	function recipientOfNBooleanRecipientWithArgumentsIs(array $arguments, nboolean\recipient\recipient $recipient) :void
-	{
-	}
 }

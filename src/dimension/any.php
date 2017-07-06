@@ -30,8 +30,5 @@ class any
 				)
 			)
 		;
-
-		$this->width = $width;
-		$this->height = $height;
 	}
 }
