@@ -1,10 +1,8 @@
-<?php namespace estvoyage\ticTacToe\nboolean\recipient;
+<?php namespace estvoyage\ticTacToe\condition;
 
-use estvoyage\ticTacToe\{ nboolean, block };
+use estvoyage\ticTacToe\{ condition, block };
 
 class ifTrue extends ifTrueElse
-	implements
-		nboolean\recipient
 {
 	function __construct(block $block, array $arguments = [])
 	{

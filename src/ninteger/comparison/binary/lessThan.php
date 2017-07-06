@@ -1,14 +1,14 @@
 <?php namespace estvoyage\ticTacToe\ninteger\comparison\binary;
 
-use estvoyage\ticTacToe\{ ninteger\comparison, nboolean };
+use estvoyage\ticTacToe\{ ninteger\comparison, condition };
 
 class lessThan
 	implements
 		comparison\binary
 {
-	function recipientOfComparisonBetweenNIntegerAndNIntegerIs(int $ninteger1, int $ninteger2, nboolean\recipient $recipient) :void
+	function recipientOfComparisonBetweenNIntegerAndNIntegerIs(int $ninteger1, int $ninteger2, condition $condition) :void
 	{
-		$recipient
+		$condition
 			->nbooleanIs(
 				$ninteger1 < $ninteger2
 			)

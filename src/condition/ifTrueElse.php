@@ -1,10 +1,10 @@
-<?php namespace estvoyage\ticTacToe\nboolean\recipient;
+<?php namespace estvoyage\ticTacToe\condition;
 
-use estvoyage\ticTacToe\{ nboolean, block };
+use estvoyage\ticTacToe\{ condition, block };
 
 class ifTrueElse
 	implements
-		nboolean\recipient\withArguments
+		condition
 {
 	private
 		$true,
@@ -24,11 +24,11 @@ class ifTrueElse
 		($bool ? $this->true : $this->false)->blockArgumentsAre(... $this->arguments);
 	}
 
-	function recipientOfNBooleanRecipientWithArgumentsIs(array $arguments, recipient $recipient) :void
+	function recipientOfConditionWithArgumentsIs(array $arguments, recipient $recipient) :void
 	{
 		$self = clone $this;
 		$self->arguments = $arguments;
 
-		$recipient->nbooleanRecipientIs($self);
+		$recipient->conditionIs($self);
 	}
 }

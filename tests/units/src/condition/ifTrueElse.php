@@ -1,6 +1,6 @@
-<?php namespace estvoyage\ticTacToe\tests\units\nboolean\recipient;
+<?php namespace estvoyage\ticTacToe\tests\units\condition;
 
-require __DIR__ . '/../../../runner.php';
+require __DIR__ . '/../../runner.php';
 
 use estvoyage\ticTacToe\tests\units;
 use mock\estvoyage\ticTacToe as mockOfTicTacToe;
@@ -10,7 +10,7 @@ class ifTrueElse extends units\test
 	function testClass()
 	{
 		$this->testedClass
-			->implements('estvoyage\ticTacToe\nboolean\recipient\withArguments')
+			->implements('estvoyage\ticTacToe\condition')
 		;
 	}
 
@@ -74,22 +74,22 @@ class ifTrueElse extends units\test
 		;
 	}
 
-	function testRecipientOfNBooleanRecipientWithArgumentsIs()
+	function testRecipientOfConditionWithArgumentsIs()
 	{
 		$this
 			->given(
-				$recipient = new mockOfTicTacToe\nboolean\recipient\recipient,
+				$recipient = new mockOfTicTacToe\condition\recipient,
 				$arguments = [ '', uniqid(), null, true, false, rand(PHP_INT_MIN, PHP_INT_MAX), M_PI, new \stdClass ],
 				$this->newTestedInstance($true = new mockOfTicTacToe\block, $false = new mockOfTicTacToe\block, [])
 			)
 			->if(
-				$this->testedInstance->recipientOfNBooleanRecipientWithArgumentsIs($arguments, $recipient)
+				$this->testedInstance->recipientOfConditionWithArgumentsIs($arguments, $recipient)
 			)
 			->then
 				->object($this->testedInstance)
 					->isEqualTo($this->newTestedInstance($true, $false, []))
 				->mock($recipient)
-					->receive('nbooleanRecipientIs')
+					->receive('conditionIs')
 						->withArguments($this->newTestedInstance($true, $false, $arguments))
 							->once
 		;

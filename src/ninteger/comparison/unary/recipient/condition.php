@@ -1,6 +1,6 @@
 <?php namespace estvoyage\ticTacToe\ninteger\comparison\unary\recipient;
 
-use estvoyage\ticTacToe\{ nboolean, ninteger\comparison };
+use estvoyage\{ ticTacToe, ticTacToe\ninteger\comparison };
 
 class condition
 	implements
@@ -10,7 +10,7 @@ class condition
 		$condition
 	;
 
-	function __construct(nboolean\recipient $condition)
+	function __construct(ticTacToe\condition $condition)
 	{
 		$this->condition = $condition;
 	}
@@ -18,9 +18,9 @@ class condition
 	function comparisonWithNIntegerIs(int $ninteger, bool $boolean) :void
 	{
 		$this->condition
-			->recipientOfNBooleanRecipientWithArgumentsIs(
+			->recipientOfConditionWithArgumentsIs(
 				[ $ninteger ],
-				new nboolean\recipient\recipient\functor(
+				new ticTacToe\condition\recipient\functor(
 					function($conditionWithArguments) use ($boolean)
 					{
 						$conditionWithArguments->nbooleanIs($boolean);

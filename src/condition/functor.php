@@ -1,6 +1,6 @@
-<?php namespace estvoyage\ticTacToe\nboolean\recipient;
+<?php namespace estvoyage\ticTacToe\condition;
 
-use estvoyage\{ ticTacToe, ticTacToe\nboolean };
+use estvoyage\ticTacToe;
 
 class functor extends block
 {

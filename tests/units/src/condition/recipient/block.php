@@ -1,4 +1,4 @@
-<?php namespace estvoyage\ticTacToe\tests\units\nboolean\recipient;
+<?php namespace estvoyage\ticTacToe\tests\units\condition\recipient;
 
 require __DIR__ . '/../../../runner.php';
 
@@ -10,26 +10,26 @@ class block extends units\test
 	function testClass()
 	{
 		$this->testedClass
-			->implements('estvoyage\ticTacToe\nboolean\recipient')
+			->implements('estvoyage\ticTacToe\condition\recipient')
 		;
 	}
 
-	function testNBooleanIs()
+	function testConditionIs()
 	{
 		$this
 			->given(
 				$this->newTestedInstance($block = new mockOfTicTacToe\block),
-				$boolean = rand(0, 1) == 1
+				$condition = new mockOfTicTacToe\condition
 			)
 			->if(
-				$this->testedInstance->nbooleanIs($boolean)
+				$this->testedInstance->conditionIs($condition)
 			)
 			->then
 				->object($this->testedInstance)
 					->isEqualTo($this->newTestedInstance($block))
 				->mock($block)
 					->receive('blockArgumentsAre')
-						->withArguments($boolean)
+						->withArguments($condition)
 							->once
 		;
 	}

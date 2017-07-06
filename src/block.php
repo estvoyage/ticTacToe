@@ -3,5 +3,4 @@
 interface block
 {
 	function blockArgumentsAre(... $arguments) :void;
-
 }

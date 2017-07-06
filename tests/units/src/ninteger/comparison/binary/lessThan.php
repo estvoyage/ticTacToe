@@ -22,15 +22,15 @@ class lessThan extends units\test
 		$this
 			->given(
 				$this->newTestedInstance,
-				$recipient = new mockOfTicTacToe\nboolean\recipient
+				$condition = new mockOfTicTacToe\condition
 			)
 			->if(
-				$this->testedInstance->recipientOfComparisonBetweenNIntegerAndNIntegerIs($ninteger1, $ninteger2, $recipient)
+				$this->testedInstance->recipientOfComparisonBetweenNIntegerAndNIntegerIs($ninteger1, $ninteger2, $condition)
 			)
 			->then
 				->object($this->testedInstance)
 					->isEqualTo($this->newTestedInstance)
-				->mock($recipient)
+				->mock($condition)
 					->receive('nbooleanIs')
 						->withArguments($boolean)
 							->once

@@ -18,15 +18,15 @@ class condition extends units\test
 	{
 		$this
 			->given(
-				$this->newTestedInstance($condition = new mockOfTicTacToe\nboolean\recipient\withArguments),
+				$this->newTestedInstance($condition = new mockOfTicTacToe\condition),
 				$ninteger = rand(PHP_INT_MIN, PHP_INT_MAX),
 				$boolean = rand(0, 1) == 1,
 
-				$conditionWithArguments = new mockOfTicTacToe\nboolean\recipient,
-				$this->calling($condition)->recipientOfNBooleanRecipientWithArgumentsIs = function($arguments, $recipient) use ($ninteger, $conditionWithArguments) {
+				$conditionWithArguments = new mockOfTicTacToe\condition,
+				$this->calling($condition)->recipientOfConditionWithArgumentsIs = function($arguments, $recipient) use ($ninteger, $conditionWithArguments) {
 					if ($arguments == [ $ninteger ])
 					{
-						$recipient->nbooleanRecipientIs($conditionWithArguments);
+						$recipient->conditionIs($conditionWithArguments);
 					}
 				}
 			)

@@ -1,6 +1,6 @@
 <?php namespace estvoyage\ticTacToe\board;
 
-use estvoyage\ticTacToe\{ board, symbol, coordinate, ninteger, block, nboolean };
+use estvoyage\ticTacToe\{ board, symbol, coordinate, ninteger, block, condition };
 
 class x3
 	implements
@@ -42,7 +42,7 @@ class x3
 					(new symbol\comparison\unary\name\undefined)
 						->recipientOfComparisonWithTicTacToeSymbolIs(
 							$this->symbols[$key],
-							new nboolean\recipient\ifTrueElse(
+							new condition\ifTrueElse(
 								new block\functor(
 									function() use ($recipient, $symbol, $key)
 									{

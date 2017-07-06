@@ -1,4 +1,4 @@
-<?php namespace estvoyage\ticTacToe\nboolean\recipient\recipient;
+<?php namespace estvoyage\ticTacToe\condition\recipient;
 
 use estvoyage\ticTacToe;
 

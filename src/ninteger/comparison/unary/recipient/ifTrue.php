@@ -1,6 +1,6 @@
 <?php namespace estvoyage\ticTacToe\ninteger\comparison\unary\recipient;
 
-use estvoyage\ticTacToe\{ ninteger, block, nboolean };
+use estvoyage\ticTacToe\{ ninteger, block, condition };
 
 class ifTrue extends block\functor
 	implements
@@ -9,7 +9,7 @@ class ifTrue extends block\functor
 	function comparisonWithNIntegerIs(int $ninteger, bool $boolean) :void
 	{
 		(
-			new nboolean\recipient\ifTrueElse(
+			new condition\ifTrueElse(
 				new block\functor(
 					function() use ($ninteger) { parent::blockArgumentsAre($ninteger); }
 				),

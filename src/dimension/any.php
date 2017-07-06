@@ -1,6 +1,6 @@
 <?php namespace estvoyage\ticTacToe\dimension;
 
-use estvoyage\ticTacToe\{ dimension, ninteger, comparison, nboolean, block };
+use estvoyage\ticTacToe\{ dimension, ninteger, comparison, condition, block };
 
 class any
 	implements
@@ -14,18 +14,18 @@ class any
 	function __construct(int $width, $height)
 	{
 		(new ninteger\comparison\unary\lessThan)
-			->recipientOfComparisonWithNIntegerIsNBooleanRecipient(
+			->recipientOfComparisonWithNIntegerIsCondition(
 				$width,
-				new nboolean\recipient\error(
+				new condition\ifTrueError(
 					new \typeError('First argument must be an integer greater than or equal to 0')
 				)
 			)
 		;
 
 		(new ninteger\comparison\unary\lessThan)
-			->recipientOfComparisonWithNIntegerIsNBooleanRecipient(
+			->recipientOfComparisonWithNIntegerIsCondition(
 				$height,
-				new nboolean\recipient\error(
+				new condition\ifTrueError(
 					new \typeError('Second argument must be an integer greater than or equal to 0')
 				)
 			)

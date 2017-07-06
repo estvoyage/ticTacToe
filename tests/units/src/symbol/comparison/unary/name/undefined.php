@@ -12,48 +12,48 @@ class undefined extends units\test
 		$this
 			->given(
 				$symbol = new mockOfTicTacToe\symbol,
-				$recipient = new mockOfTicTacToe\nboolean\recipient,
+				$condition = new mockOfTicTacToe\condition,
 				$this->newTestedInstance
 			)
 			->if(
-				$this->testedInstance->recipientOfComparisonWithTicTacToeSymbolIs($symbol, $recipient)
+				$this->testedInstance->recipientOfComparisonWithTicTacToeSymbolIs($symbol, $condition)
 			)
 			->then
 				->object($this->testedInstance)
 					->isEqualTo($this->newTestedInstance)
-				->mock($recipient)
+				->mock($condition)
 					->receive('nbooleanIs')
 						->withArguments(true)
 							->once
 
 			->given(
-				$this->calling($symbol)->recipientOfTicTacToeSymbolNameIs = function($recipient) {
-					$recipient->ticTacToeSymbolIsX();
+				$this->calling($symbol)->recipientOfTicTacToeSymbolNameIs = function($condition) {
+					$condition->ticTacToeSymbolIsX();
 				}
 			)
 			->if(
-				$this->testedInstance->recipientOfComparisonWithTicTacToeSymbolIs($symbol, $recipient)
+				$this->testedInstance->recipientOfComparisonWithTicTacToeSymbolIs($symbol, $condition)
 			)
 			->then
 				->object($this->testedInstance)
 					->isEqualTo($this->newTestedInstance)
-				->mock($recipient)
+				->mock($condition)
 					->receive('nbooleanIs')
 						->withArguments(false)
 							->once
 
 			->given(
-				$this->calling($symbol)->recipientOfTicTacToeSymbolNameIs = function($recipient) {
-					$recipient->ticTacToeSymbolIsO();
+				$this->calling($symbol)->recipientOfTicTacToeSymbolNameIs = function($condition) {
+					$condition->ticTacToeSymbolIsO();
 				}
 			)
 			->if(
-				$this->testedInstance->recipientOfComparisonWithTicTacToeSymbolIs($symbol, $recipient)
+				$this->testedInstance->recipientOfComparisonWithTicTacToeSymbolIs($symbol, $condition)
 			)
 			->then
 				->object($this->testedInstance)
 					->isEqualTo($this->newTestedInstance)
-				->mock($recipient)
+				->mock($condition)
 					->receive('nbooleanIs')
 						->withArguments(false)
 							->twice

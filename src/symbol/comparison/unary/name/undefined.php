@@ -1,10 +1,10 @@
 <?php namespace estvoyage\ticTacToe\symbol\comparison\unary\name;
 
-use estvoyage\ticTacToe\{ symbol, nboolean };
+use estvoyage\ticTacToe\{ symbol, condition };
 
 class undefined
 {
-	function recipientOfComparisonWithTicTacToeSymbolIs(symbol $symbol, nboolean\recipient $recipient) :void
+	function recipientOfComparisonWithTicTacToeSymbolIs(symbol $symbol, condition $condition) :void
 	{
 		$boolean = true;
 
@@ -18,6 +18,6 @@ class undefined
 			)
 		;
 
-		$recipient->nbooleanIs($boolean);
+		$condition->nbooleanIs($boolean);
 	}
 }
