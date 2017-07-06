@@ -20,15 +20,7 @@ class condition extends units\test
 			->given(
 				$this->newTestedInstance($condition = new mockOfTicTacToe\condition),
 				$ninteger = rand(PHP_INT_MIN, PHP_INT_MAX),
-				$boolean = rand(0, 1) == 1,
-
-				$conditionWithArguments = new mockOfTicTacToe\condition,
-				$this->calling($condition)->recipientOfConditionWithArgumentsIs = function($arguments, $recipient) use ($ninteger, $conditionWithArguments) {
-					if ($arguments == [ $ninteger ])
-					{
-						$recipient->conditionIs($conditionWithArguments);
-					}
-				}
+				$boolean = rand(0, 1) == 1
 			)
 			->if(
 				$this->testedInstance->comparisonWithNIntegerIs($ninteger, $boolean)
@@ -36,7 +28,7 @@ class condition extends units\test
 			->then
 				->object($this->testedInstance)
 					->isEqualTo($this->newTestedInstance($condition))
-				->mock($conditionWithArguments)
+				->mock($condition)
 					->receive('nbooleanIs')
 						->withArguments($boolean)
 							->once

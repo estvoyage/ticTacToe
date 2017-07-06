@@ -25,25 +25,4 @@ class ifTrueError extends units\test
 				->isIdenticalTo($error)
 		;
 	}
-
-	function testRecipientOfConditionWithArgumentsIs()
-	{
-		$this
-			->given(
-				$this->newTestedInstance($error = new \mock\error),
-				$arguments = [ '', uniqid(), rand(PHP_INT_MIN, PHP_INT_MAX), null, true, false, [], new \stdClass ],
-				$recipient = new mockOfTicTacToe\condition\recipient
-			)
-			->if(
-				$this->testedInstance->recipientOfConditionWithArgumentsIs($arguments, $recipient)
-			)
-			->then
-				->object($this->testedInstance)
-					->isEqualTo($this->newTestedInstance($error))
-				->mock($recipient)
-					->receive('conditionIs')
-						->withArguments($this->testedInstance)
-							->once
-		;
-	}
 }

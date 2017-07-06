@@ -5,7 +5,7 @@ require __DIR__ . '/../../runner.php';
 use estvoyage\ticTacToe\tests\units;
 use mock\estvoyage\ticTacToe as mockOfTicTacToe;
 
-class block extends units\test
+class ifFalseErrorElse extends units\test
 {
 	function testClass()
 	{
@@ -14,23 +14,28 @@ class block extends units\test
 		;
 	}
 
-	function testNBooleanIs()
+	function testNbooleanIs()
 	{
 		$this
 			->given(
-				$this->newTestedInstance($block = new mockOfTicTacToe\block),
-				$boolean = rand(0, 1) == 1
+				$this->newTestedInstance($error = new \mock\error, $elseBlock = new mockOfTicTacToe\block)
 			)
 			->if(
-				$this->testedInstance->nbooleanIs($boolean)
+				$this->testedInstance->nbooleanIs(true)
 			)
 			->then
 				->object($this->testedInstance)
-					->isEqualTo($this->newTestedInstance($block))
-				->mock($block)
+					->isEqualTo($this->newTestedInstance($error, $elseBlock))
+				->mock($elseBlock)
 					->receive('blockArgumentsAre')
-						->withArguments($boolean)
+						->withArguments()
 							->once
+
+			->exception(function() {
+					$this->testedInstance->nbooleanIs(false);
+				}
+			)
+				->isIdenticalTo($error)
 		;
 	}
 }

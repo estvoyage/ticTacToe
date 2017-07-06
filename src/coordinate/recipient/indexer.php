@@ -1,6 +1,6 @@
 <?php namespace estvoyage\ticTacToe\coordinate\recipient;
 
-use estvoyage\ticTacToe\{ coordinate, block, ninteger };
+use estvoyage\ticTacToe\{ coordinate, block, ninteger, condition };
 
 class indexer
 	implements
@@ -31,12 +31,19 @@ class indexer
 		)
 			->recipientOfOperationWithNIntegerIs(
 				$line,
-				new ninteger\recipient\comparison\unary(
-					new ninteger\comparison\unary\between(0, ($this->width * $this->height) - 1),
-					new ninteger\comparison\unary\recipient\ifTrueElse(
-						$this->blockForKey,
-						$this->blockForInvalidLineOrColumn
-					)
+				new ninteger\recipient\functor(
+					function($key)
+					{
+						(new ninteger\comparison\unary\between(0, ($this->width * $this->height) - 1))
+							->recipientOfComparisonWithNIntegerIsCondition(
+								$key,
+								new condition\ifTrueElse(
+									new block\forwarder($this->blockForKey, $key),
+									$this->blockForInvalidLineOrColumn
+								)
+							)
+						;
+					}
 				)
 			)
 		;

@@ -23,12 +23,4 @@ class ifTrueElse
 	{
 		($bool ? $this->true : $this->false)->blockArgumentsAre(... $this->arguments);
 	}
-
-	function recipientOfConditionWithArgumentsIs(array $arguments, recipient $recipient) :void
-	{
-		$self = clone $this;
-		$self->arguments = $arguments;
-
-		$recipient->conditionIs($self);
-	}
 }

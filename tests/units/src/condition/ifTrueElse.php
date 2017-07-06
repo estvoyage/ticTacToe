@@ -73,25 +73,4 @@ class ifTrueElse extends units\test
 							->once
 		;
 	}
-
-	function testRecipientOfConditionWithArgumentsIs()
-	{
-		$this
-			->given(
-				$recipient = new mockOfTicTacToe\condition\recipient,
-				$arguments = [ '', uniqid(), null, true, false, rand(PHP_INT_MIN, PHP_INT_MAX), M_PI, new \stdClass ],
-				$this->newTestedInstance($true = new mockOfTicTacToe\block, $false = new mockOfTicTacToe\block, [])
-			)
-			->if(
-				$this->testedInstance->recipientOfConditionWithArgumentsIs($arguments, $recipient)
-			)
-			->then
-				->object($this->testedInstance)
-					->isEqualTo($this->newTestedInstance($true, $false, []))
-				->mock($recipient)
-					->receive('conditionIs')
-						->withArguments($this->newTestedInstance($true, $false, $arguments))
-							->once
-		;
-	}
 }

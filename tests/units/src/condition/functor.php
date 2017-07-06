@@ -31,25 +31,4 @@ class functor extends units\test
 					->isEqualTo([ $boolean ])
 		;
 	}
-
-	function testRecipientOfConditionWithArgumentsIs()
-	{
-		$this
-			->given(
-				$this->newTestedInstance($callable = function() {}),
-				$recipient = new mockOfTicTacToe\condition\recipient,
-				$arguments = [ '', uniqid(), rand(PHP_INT_MIN, PHP_INT_MAX), null, true, false, [], new \stdClass ]
-			)
-			->if(
-				$this->testedInstance->recipientOfConditionWithArgumentsIs($arguments, $recipient)
-			)
-			->then
-				->object($this->testedInstance)
-					->isEqualTo($this->newTestedInstance($callable))
-				->mock($recipient)
-					->receive('conditionIs')
-						->withArguments($this->testedInstance)
-							->once
-		;
-	}
 }

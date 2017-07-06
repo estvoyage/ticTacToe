@@ -21,9 +21,4 @@ class block
 			->blockArgumentsAre($boolean)
 		;
 	}
-
-	function recipientOfConditionWithArgumentsIs(array $arguments, recipient $recipient) :void
-	{
-		$recipient->conditionIs($this);
-	}
 }

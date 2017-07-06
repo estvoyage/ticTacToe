@@ -35,7 +35,7 @@ class ifFalseElse extends units\test
 					->isEqualTo($this->newTestedInstance($false, $true))
 				->mock($true)
 					->receive('blockArgumentsAre')
-						->withArguments($ninteger)
+						->withArguments()
 							->once
 				->mock($false)
 					->receive('blockArgumentsAre')
@@ -52,11 +52,11 @@ class ifFalseElse extends units\test
 					->isEqualTo($this->newTestedInstance($false, $true))
 				->mock($true)
 					->receive('blockArgumentsAre')
-						->withArguments($ninteger)
+						->withArguments()
 							->once
 				->mock($false)
 					->receive('blockArgumentsAre')
-						->withArguments($ninteger)
+						->withArguments()
 							->once
 		;
 	}
