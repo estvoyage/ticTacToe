@@ -17,7 +17,7 @@ class x3 extends units\test
 	/**
 	 * @dataProvider lineColumnAndPositionProvider
 	 */
-	function testRecipientOfTicTacToeSymbolAtCoordinateIs($line, $column, $position)
+	function testRecipientOfTicTacToeSymbolAtCoordinateIs($rowValue, $columnValue, $position)
 	{
 		$this
 			->given(
@@ -35,9 +35,22 @@ class x3 extends units\test
 
 				$this->newTestedInstance(... $symbols),
 
+				$row = new mockOfTicTacToe\matrix\coordinate\distance,
+				$this->calling($row)->recipientOfValueOfOIntegerIs = function($recipient) use ($rowValue) {
+					$recipient->nintegerIs($rowValue);
+				},
+
+				$column = new mockOfTicTacToe\matrix\coordinate\distance,
+				$this->calling($column)->recipientOfValueOfOIntegerIs = function($recipient) use ($columnValue) {
+					$recipient->nintegerIs($columnValue);
+				},
+
 				$coordinate = new mockOfTicTacToe\coordinate,
-				$this->calling($coordinate)->recipientOfLineAndColumnIs = function($recipient) use ($line, $column) {
-					$recipient->lineAndColumnOfTicTacToeSymbolIs($line, $column);
+				$this->calling($coordinate)->recipientOfRowInMatrixIs = function($recipient) use ($row) {
+					$recipient->rowInMatrixIs($row);
+				},
+				$this->calling($coordinate)->recipientOfColumnInMatrixIs = function($recipient) use ($column) {
+					$recipient->columnInMatrixIs($column);
 				},
 
 				$recipient = new mockOfTicTacToe\symbol\recipient
@@ -58,7 +71,7 @@ class x3 extends units\test
 	/**
 	 * @dataProvider lineColumnAndPositionProvider
 	 */
-	function testRecipientOfTicTacToeBoardWithSymbolAtCoordinateIs($line, $column, $position)
+	function testRecipientOfTicTacToeBoardWithSymbolAtCoordinateIs($rowValue, $columnValue, $position)
 	{
 		$this
 			->given(
@@ -74,9 +87,22 @@ class x3 extends units\test
 					$l2c2 = new mockOfTicTacToe\symbol
 				),
 
+				$row = new mockOfTicTacToe\matrix\coordinate\distance,
+				$this->calling($row)->recipientOfValueOfOIntegerIs = function($recipient) use ($rowValue) {
+					$recipient->nintegerIs($rowValue);
+				},
+
+				$column = new mockOfTicTacToe\matrix\coordinate\distance,
+				$this->calling($column)->recipientOfValueOfOIntegerIs = function($recipient) use ($columnValue) {
+					$recipient->nintegerIs($columnValue);
+				},
+
 				$coordinate = new mockOfTicTacToe\coordinate,
-				$this->calling($coordinate)->recipientOfLineAndColumnIs = function($recipient) use ($line, $column) {
-					$recipient->lineAndColumnOfTicTacToeSymbolIs($line, $column);
+				$this->calling($coordinate)->recipientOfRowInMatrixIs = function($recipient) use ($row) {
+					$recipient->rowInMatrixIs($row);
+				},
+				$this->calling($coordinate)->recipientOfColumnInMatrixIs = function($recipient) use ($column) {
+					$recipient->columnInMatrixIs($column);
 				},
 
 				$symbol = new mockOfTicTacToe\symbol,
@@ -123,7 +149,7 @@ class x3 extends units\test
 	/**
 	 * @dataProvider invalidLineAndColumnProvider
 	 */
-	function testRecipientOfTicTacToeBoardWithSymbolAtCoordinateIs_withInvalidCoordinate($line, $column)
+	function testRecipientOfTicTacToeBoardWithSymbolAtCoordinateIs_withInvalidCoordinate($rowValue, $columnValue)
 	{
 		$this
 			->given(
@@ -141,9 +167,22 @@ class x3 extends units\test
 
 				$this->newTestedInstance(... $symbols),
 
+				$row = new mockOfTicTacToe\matrix\coordinate\distance,
+				$this->calling($row)->recipientOfValueOfOIntegerIs = function($recipient) use ($rowValue) {
+					$recipient->nintegerIs($rowValue);
+				},
+
+				$column = new mockOfTicTacToe\matrix\coordinate\distance,
+				$this->calling($column)->recipientOfValueOfOIntegerIs = function($recipient) use ($columnValue) {
+					$recipient->nintegerIs($columnValue);
+				},
+
 				$coordinate = new mockOfTicTacToe\coordinate,
-				$this->calling($coordinate)->recipientOfLineAndColumnIs = function($recipient) use ($line, $column) {
-					$recipient->lineAndColumnOfTicTacToeSymbolIs($line, $column);
+				$this->calling($coordinate)->recipientOfRowInMatrixIs = function($recipient) use ($row) {
+					$recipient->rowInMatrixIs($row);
+				},
+				$this->calling($coordinate)->recipientOfColumnInMatrixIs = function($recipient) use ($column) {
+					$recipient->columnInMatrixIs($column);
 				},
 
 				$symbol = new mockOfTicTacToe\symbol,
@@ -157,16 +196,15 @@ class x3 extends units\test
 				->object($this->testedInstance)
 					->isEqualTo($this->newTestedInstance(... $symbols))
 				->mock($recipient)
-					->receive('invalidCoordinateForTicTacToeSymbol')
-						->withArguments($coordinate, $symbol)
-							->once
+					->receive('ticTacToeBoardIs')
+						->never
 		;
 	}
 
 	/**
 	 * @dataProvider lineColumnAndPositionProvider
 	 */
-	function testRecipientOfTicTacToeBoardWithSymbolAtCoordinateIs_withSymbolOverlap($line, $column, $position)
+	function testRecipientOfTicTacToeBoardWithSymbolAtCoordinateIs_withSymbolOverlap($rowValue, $columnValue, $position)
 	{
 		$this
 			->given(
@@ -203,9 +241,22 @@ class x3 extends units\test
 					$recipient->ticTacToeSymbolIsX();
 				},
 
+				$row = new mockOfTicTacToe\matrix\coordinate\distance,
+				$this->calling($row)->recipientOfValueOfOIntegerIs = function($recipient) use ($rowValue) {
+					$recipient->nintegerIs($rowValue);
+				},
+
+				$column = new mockOfTicTacToe\matrix\coordinate\distance,
+				$this->calling($column)->recipientOfValueOfOIntegerIs = function($recipient) use ($columnValue) {
+					$recipient->nintegerIs($columnValue);
+				},
+
 				$coordinate = new mockOfTicTacToe\coordinate,
-				$this->calling($coordinate)->recipientOfLineAndColumnIs = function($recipient) use ($line, $column) {
-					$recipient->lineAndColumnOfTicTacToeSymbolIs($line, $column);
+				$this->calling($coordinate)->recipientOfRowInMatrixIs = function($recipient) use ($row) {
+					$recipient->rowInMatrixIs($row);
+				},
+				$this->calling($coordinate)->recipientOfColumnInMatrixIs = function($recipient) use ($column) {
+					$recipient->columnInMatrixIs($column);
 				},
 
 				$recipient = new mockOfTicTacToe\board\recipient
@@ -228,9 +279,8 @@ class x3 extends units\test
 						)
 					)
 				->mock($recipient)
-					->receive('overlapCoordinateForTicTacToeSymbol')
-						->withArguments($coordinate, $symbol)
-							->once
+					->receive('ticTacToeBoardIs')
+						->never
 		;
 	}
 

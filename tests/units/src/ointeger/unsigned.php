@@ -52,6 +52,51 @@ class unsigned extends units\test
 		;
 	}
 
+	/**
+	 * @dataProvider validValueProvider
+	 */
+	function testRecipientOfOIntegerWithValueIs_withValidValue($value)
+	{
+		$this
+			->given(
+				$this->newTestedInstance(0),
+				$recipient = new mockOfTicTacToe\ointeger\recipient
+			)
+			->if(
+				$this->testedInstance->recipientOfOIntegerWithValueIs($value, $recipient)
+			)
+			->then
+				->object($this->testedInstance)
+					->isEqualTo($this->newTestedInstance(0))
+				->mock($recipient)
+					->receive('ointegerIs')
+						->withArguments($this->newTestedInstance($value))
+							->once
+		;
+	}
+
+	/**
+	 * @dataProvider invalidValueProvider
+	 */
+	function testRecipientOfOIntegerWithValueIs_withInvalidValue($value)
+	{
+		$this
+			->given(
+				$this->newTestedInstance(0),
+				$recipient = new mockOfTicTacToe\ointeger\recipient
+			)
+			->if(
+				$this->testedInstance->recipientOfOIntegerWithValueIs($value, $recipient)
+			)
+			->then
+				->object($this->testedInstance)
+					->isEqualTo($this->newTestedInstance(0))
+				->mock($recipient)
+					->receive('ointegerIs')
+						->never
+		;
+	}
+
 	protected function validValueProvider()
 	{
 		return [

@@ -31,4 +31,23 @@ class any
 	{
 		$recipient->nintegerIs($this->value);
 	}
+
+	function recipientOfOIntegerWithValueIs($value, ointeger\recipient $recipient) :void
+	{
+		(
+			new condition\ifTrue(
+				new block\functor(
+					function() use ($recipient, $value)
+					{
+						$ointeger = clone $this;
+						$ointeger->value = (int) $value;
+
+						$recipient->ointegerIs($ointeger);
+					}
+				)
+			)
+		)
+			->nbooleanIs(is_numeric($value) && (int) $value == $value)
+		;
+	}
 }

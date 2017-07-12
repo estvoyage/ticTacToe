@@ -1,6 +1,5 @@
 <?php namespace estvoyage\ticTacToe;
 
-interface coordinate
+interface coordinate extends matrix\coordinate
 {
-	function recipientOfLineAndColumnIs(coordinate\recipient $recipient) :void;
 }

@@ -1,6 +1,6 @@
 <?php namespace estvoyage\ticTacToe\ointeger;
 
-use estvoyage\ticTacToe\condition;
+use estvoyage\ticTacToe\{ condition, ointeger, block };
 
 class unsigned extends any
 {
@@ -23,4 +23,24 @@ class unsigned extends any
 		}
 	}
 
+	function recipientOfOIntegerWithValueIs($value, ointeger\recipient $recipient) :void
+	{
+		parent::recipientOfOIntegerWithValueIs(
+			$value,
+			new ointeger\recipient\functor(
+				function($ointeger) use ($recipient) {
+					(new comparison\unary\lessThan(new any))
+						->recipientOfComparisonWithOIntegerIsCondition(
+							$ointeger,
+							new condition\ifFalseFunctor(
+								function() use ($ointeger, $recipient) {
+									$recipient->ointegerIs($ointeger);
+								}
+							)
+						)
+					;
+				}
+			)
+		);
+	}
 }

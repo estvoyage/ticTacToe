@@ -1,6 +1,6 @@
 <?php namespace estvoyage\ticTacToe\board;
 
-use estvoyage\ticTacToe\{ board, symbol, coordinate, ninteger, block, condition };
+use estvoyage\ticTacToe\{ board, symbol, coordinate, ninteger, block, condition, matrix, ointeger, future };
 
 class x3
 	implements
@@ -16,67 +16,104 @@ class x3
 		symbol $l2c0, symbol $l2c1, symbol $l2c2
 	)
 	{
-		$this->symbols = func_get_args();
+		$this->symbols = new matrix\any(
+			new matrix\dimension\square(
+				new matrix\dimension\side\any(3)
+			),
+			$l0c0, $l0c1, $l0c2,
+			$l1c0, $l1c1, $l1c2,
+			$l2c0, $l2c1, $l2c2
+		);
 	}
 
 	function recipientOfTicTacToeSymbolAtCoordinateIs(coordinate $coordinate, symbol\recipient $recipient) :void
 	{
-		self::keyBlockAndInvalidBlockForCoordinateIs(
-			$coordinate,
-			new block\functor(
-				function($key) use ($recipient)
-				{
-					$recipient->ticTacToeSymbolIs($this->symbols[$key]);
-				}
+		$this->symbols
+			->recipientOfMatrixValueAtCoordinateIs(
+				$coordinate,
+				new matrix\value\recipient\functor(
+					function($symbol) use ($recipient)
+					{
+						$recipient->ticTacToeSymbolIs($symbol);
+					}
+				)
 			)
-		);
+		;
 	}
 
 	function recipientOfTicTacToeBoardWithSymbolAtCoordinateIs(symbol $symbol, coordinate $coordinate, board\recipient $recipient) :void
 	{
-		self::keyBlockAndInvalidBlockForCoordinateIs(
-			$coordinate,
-			new block\functor(
-				function($key) use ($recipient, $coordinate, $symbol)
-				{
-					(new symbol\comparison\unary\name\undefined)
-						->recipientOfComparisonWithTicTacToeSymbolIs(
-							$this->symbols[$key],
-							new condition\ifTrueElse(
-								new block\functor(
-									function() use ($recipient, $symbol, $key)
-									{
-										$board = clone $this;
-										$board->symbols[$key] = $symbol;
-
-										$recipient->ticTacToeBoardIs($board);
-									}
-								),
-								new block\functor(
-									function() use ($recipient, $coordinate, $symbol)
-									{
-										$recipient->overlapCoordinateForTicTacToeSymbol($coordinate, $symbol);
-									}
+		(
+			new matrix\value\recipient\future(
+				new block\functor(
+					function($symbolInMatrix) use ($symbol, $coordinate, $recipient)
+					{
+						(new symbol\comparison\unary\name\undefined)
+							->recipientOfComparisonWithTicTacToeSymbolIs(
+								$symbolInMatrix,
+								new condition\ifTrue(
+									new block\functor(
+										function() use ($symbol, $coordinate, $recipient)
+										{
+											$this
+												->recipientForBoardWithSymbolAtCoordinateIs(
+													$symbol,
+													$coordinate,
+													$recipient
+												)
+											;
+										}
+									)
 								)
 							)
-						)
-					;
-				}
-			),
-			new block\functor(
-				function() use ($recipient, $coordinate, $symbol)
-				{
-					$recipient->invalidCoordinateForTicTacToeSymbol($coordinate, $symbol);
-				}
+						;
+					}
+				),
+				new block\functor(
+					function() use ($symbol, $coordinate, $recipient)
+					{
+						$this
+							->recipientForBoardWithSymbolAtCoordinateIs(
+								$symbol,
+								$coordinate,
+								$recipient
+							)
+						;
+					}
+				)
 			)
-		);
+		)
+			->blockIs(
+				new block\functor(
+					function($symbolRecipient) use ($coordinate)
+					{
+						$this->symbols
+							->recipientOfMatrixValueAtCoordinateIs(
+								$coordinate,
+								$symbolRecipient
+							)
+						;
+					}
+				)
+			)
+		;
 	}
 
-	private static function keyBlockAndInvalidBlockForCoordinateIs(coordinate $coordinate, block $keyBlock, block $invalidBlock = null)
+	private function recipientForBoardWithSymbolAtCoordinateIs(symbol $symbol, coordinate $coordinate, board\recipient $recipient) :void
 	{
-		$coordinate
-			->recipientOfLineAndColumnIs(
-				new coordinate\recipient\indexer(3, 3, $keyBlock, $invalidBlock)
+		$this->symbols
+			->recipientOfMatrixWithValueAtCoordinateIs(
+				$symbol,
+				$coordinate,
+				new matrix\recipient\functor(
+					function($symbols) use ($recipient)
+					{
+						$board = clone $this;
+						$board->symbols = $symbols;
+
+						$recipient->ticTacToeBoardIs($board);
+					}
+				)
 			)
 		;
 	}
