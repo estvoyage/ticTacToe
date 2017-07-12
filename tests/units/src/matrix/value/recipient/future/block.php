@@ -1,11 +1,11 @@
-<?php namespace estvoyage\ticTacToe\tests\units\matrix\value\recipient;
+<?php namespace estvoyage\ticTacToe\tests\units\matrix\value\recipient\future;
 
-require __DIR__ . '/../../../../runner.php';
+require __DIR__ . '/../../../../../runner.php';
 
 use estvoyage\ticTacToe\tests\units;
 use mock\estvoyage\ticTacToe as mockOfTicTacToe;
 
-class future extends units\test
+class block extends units\test
 {
 	function testClass()
 	{

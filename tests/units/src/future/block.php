@@ -1,12 +1,19 @@
-<?php namespace estvoyage\ticTacToe\tests\units;
+<?php namespace estvoyage\ticTacToe\tests\units\future;
 
-require __DIR__ . '/../runner.php';
+require __DIR__ . '/../../runner.php';
 
 use estvoyage\ticTacToe\tests\units;
 use mock\estvoyage\ticTacToe as mockOfTicTacToe;
 
-class future extends units\test
+class block extends units\test
 {
+	function testClass()
+	{
+		$this->testedClass
+			->implements('estvoyage\ticTacToe\future')
+		;
+	}
+
 	function testBlockIs()
 	{
 		$this
@@ -47,6 +54,22 @@ class future extends units\test
 				->mock($blockIfNoBinding)
 					->receive('blockArgumentsAre')
 						->once
+		;
+	}
+
+	function testValueIs()
+	{
+		$this
+			->given(
+				$this->newTestedInstance($blockForValue = new mockOfTicTacToe\block, $blockIfNoBinding = new mockOfTicTacToe\block),
+				$value = uniqid()
+			)
+			->if(
+				$this->testedInstance->valueIs($value)
+			)
+			->then
+				->object($this->testedInstance)
+					->isEqualTo($this->newTestedInstance($blockForValue, $blockIfNoBinding))
 		;
 	}
 }

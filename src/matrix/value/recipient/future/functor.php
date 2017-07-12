@@ -1,8 +1,8 @@
-<?php namespace estvoyage\ticTacToe\matrix\value\recipient;
+<?php namespace estvoyage\ticTacToe\matrix\value\recipient\future;
 
 use estvoyage\{ ticTacToe, ticTacToe\matrix, ticTacToe\block };
 
-class future extends ticTacToe\future
+class functor extends ticTacToe\future\functor
 	implements
 		matrix\value\recipient
 {
