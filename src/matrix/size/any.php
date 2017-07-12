@@ -2,7 +2,7 @@
 
 use estvoyage\ticTacToe\{ matrix, ointeger };
 
-class any extends ointeger\unsigned
+class any extends ointeger\unsigned\any
 	implements
 		matrix\size
 {

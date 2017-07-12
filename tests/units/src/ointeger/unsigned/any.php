@@ -1,16 +1,16 @@
-<?php namespace estvoyage\ticTacToe\tests\units\ointeger;
+<?php namespace estvoyage\ticTacToe\tests\units\ointeger\unsigned;
 
-require __DIR__ . '/../../runner.php';
+require __DIR__ . '/../../../runner.php';
 
 use estvoyage\ticTacToe\tests\units;
 use mock\estvoyage\ticTacToe as mockOfTicTacToe;
 
-class unsigned extends units\test
+class any extends units\test
 {
 	function testClass()
 	{
 		$this->testedClass
-			->implements('estvoyage\ticTacToe\ointeger')
+			->implements('estvoyage\ticTacToe\ointeger\unsigned')
 		;
 	}
 
@@ -94,6 +94,27 @@ class unsigned extends units\test
 				->mock($recipient)
 					->receive('ointegerIs')
 						->never
+		;
+	}
+
+	/**
+	 * @dataProvider validValueProvider
+	 */
+	function testRecipientOfValueOfUnsignedOIntegerIs($value)
+	{
+		$this
+			->given(
+				$recipient = new mockOfTicTacToe\ninteger\unsigned\recipient
+			)
+			->if(
+				$this->newTestedInstance($value)
+					->recipientOfValueOfUnsignedOIntegerIs($recipient)
+			)
+			->then
+				->mock($recipient)
+					->receive('unsignedNintegerIs')
+						->withArguments((int) (string) $value)
+							->once
 		;
 	}
 

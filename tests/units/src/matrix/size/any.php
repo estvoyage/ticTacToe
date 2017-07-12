@@ -4,7 +4,7 @@ require __DIR__ . '/../../../runner.php';
 
 use estvoyage\ticTacToe\tests\units;
 
-class any extends units\ointeger\unsigned
+class any extends units\ointeger\unsigned\any
 {
 	function testClass()
 	{

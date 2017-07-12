@@ -2,6 +2,6 @@
 
 use estvoyage\ticTacToe\ointeger;
 
-final class key extends ointeger\unsigned
+final class key extends ointeger\unsigned\any
 {
 }
