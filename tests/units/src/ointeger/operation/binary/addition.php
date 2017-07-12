@@ -2,7 +2,7 @@
 
 require __DIR__ . '/../../../../runner.php';
 
-use estvoyage\ticTacToe\tests\units;
+use estvoyage\ticTacToe\{ tests\units, block };
 use mock\estvoyage\ticTacToe as mockOfTicTacToe;
 
 class addition extends units\test
@@ -13,6 +13,21 @@ class addition extends units\test
 	{
 		$this->testedClass
 			->implements('estvoyage\ticTacToe\ointeger\operation\binary')
+		;
+	}
+
+	function test__construct()
+	{
+		$this
+			->given(
+				$template = new mockOfTicTacToe\ointeger
+			)
+			->if(
+				$this->newTestedInstance($template)
+			)
+			->then
+				->object($this->testedInstance)
+					->isEqualTo($this->newTestedInstance($template, new block\blackhole))
 		;
 	}
 

@@ -12,11 +12,11 @@ class multiplication
 		$overflow
 	;
 
-	function __construct(ointeger $template, ointeger $ointeger, block $overflow)
+	function __construct(ointeger $template, ointeger $ointeger, block $overflow = null)
 	{
 		$this->template = $template;
 		$this->ointeger = $ointeger;
-		$this->overflow = $overflow;
+		$this->overflow = $overflow ?: new block\blackhole;
 	}
 
 	function recipientOfOperationWithOIntegerIs(ointeger $ointeger, ointeger\recipient $recipient) :void

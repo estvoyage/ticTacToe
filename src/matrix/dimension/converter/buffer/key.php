@@ -51,8 +51,8 @@ class key
 																									{
 																										(
 																											new ointeger\operation\unary\collection(
-																												new ointeger\operation\unary\multiplication(new buffer\key, $dimensionColumn, new block\blackhole),
-																												new ointeger\operation\unary\addition(new buffer\key, $coordinateColumn, new block\blackhole)
+																												new ointeger\operation\unary\multiplication(new buffer\key, $dimensionColumn),
+																												new ointeger\operation\unary\addition(new buffer\key, $coordinateColumn)
 																											)
 																										)
 																											->recipientOfOperationWithOIntegerIs(

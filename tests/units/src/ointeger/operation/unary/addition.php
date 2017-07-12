@@ -2,12 +2,28 @@
 
 require __DIR__ . '/../../../../runner.php';
 
-use estvoyage\ticTacToe\tests\units;
+use estvoyage\ticTacToe\{ tests\units, block };
 use mock\estvoyage\ticTacToe as mockOfTicTacToe;
 
 class addition extends units\test
 {
 	use units\data\provider\ninteger\addition;
+
+	function test__construct()
+	{
+		$this
+			->given(
+				$ointeger1 = new mockOfTicTacToe\ointeger,
+				$template = new mockOfTicTacToe\ointeger
+			)
+			->if(
+				$this->newTestedInstance($template, $ointeger1)
+			)
+			->then
+				->object($this->testedInstance)
+					->isEqualTo($this->newTestedInstance($template, $ointeger1, new block\blackhole))
+		;
+	}
 
 	/**
 	 * @dataProvider noOverflowProvider
