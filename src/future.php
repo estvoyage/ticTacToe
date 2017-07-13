@@ -2,6 +2,6 @@
 
 interface future
 {
-	function blockIs(block $block) :void;
-	function valueIs($value) :void;
+	function futureForblockIs(block $block, block $future) :void;
+	function valueForFutureIs($value) :void;
 }

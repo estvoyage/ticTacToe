@@ -1,43 +1,55 @@
 <?php namespace estvoyage\ticTacToe\future;
 
-use estvoyage\{ ticTacToe, ticTacToe\future };
+use estvoyage\{ ticTacToe, ticTacToe\future, ticTacToe\condition };
 
 class block
 	implements
 		ticTacToe\future
 {
 	private
-		$blockForValue,
-		$blockIfNoBinding,
-		$valueHandler
+		$noBinding,
+		$block,
+		$value
 	;
 
-	function __construct(ticTacToe\block $blockForValue, ticTacToe\block $blockIfNoBinding)
+	function __construct(ticTacToe\block $noBinding)
 	{
-		$this->blockForValue = $blockForValue;
-		$this->blockIfNoBinding = $blockIfNoBinding;
-		$this->valueHandler = new ticTacToe\block\blackhole;
+		$this->noBinding = $noBinding;
 	}
 
-	function blockIs(ticTacToe\block $block) :void
+	function futureForBlockIs(ticTacToe\block $block, ticTacToe\block $future) :void
 	{
-		$future = clone $this;
-		$future->valueHandler = new ticTacToe\block\functor(
-			function($value) use ($future)
-			{
-				$future->blockIfNoBinding = new ticTacToe\block\blackhole;
+		$self = clone $this;
+		$self->block = $block;
 
-				$future->blockForValue->blockArgumentsAre($value);
-			}
-		);
+		$block->blockArgumentsAre($self);
 
-		$block->blockArgumentsAre($future);
-
-		$future->blockIfNoBinding->blockArgumentsAre();
+		(
+			new condition\ifTrueElse(
+				new ticTacToe\block\functor(
+					function() use ($self, $future)
+					{
+						$future->blockArgumentsAre($self->value);
+					}
+				),
+				$self->noBinding
+			)
+		)
+			->nbooleanIs(is_null($self->block))
+		;
 	}
 
-	function valueIs($value) :void
+	function valueForFutureIs($value) :void
 	{
-		$this->valueHandler->blockArgumentsAre($value);
+		(
+			new condition\ifTrue\functor(
+				function() use ($value) {
+					$this->block = null;
+					$this->value = $value;
+				}
+			)
+		)
+			->nbooleanIs(! is_null($this->block))
+		;
 	}
 }

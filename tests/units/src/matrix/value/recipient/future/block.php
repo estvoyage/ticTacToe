@@ -14,23 +14,24 @@ class block extends units\test
 		;
 	}
 
-	function testBlockIs()
+	function testFutureForBlockIs()
 	{
 		$this
 			->given(
-				$this->newTestedInstance($blockForValue = new mockOfTicTacToe\block, $blockIfNoValue = new mockOfTicTacToe\block),
-				$block = new mockOfTicTacToe\block
+				$this->newTestedInstance($noBinding = new mockOfTicTacToe\block),
+				$block = new mockOfTicTacToe\block,
+				$future = new mockOfTicTacToe\block
 			)
 			->if(
-				$this->testedInstance->blockIs($block)
+				$this->testedInstance->futureForblockIs($block, $future)
 			)
 			->then
 				->object($this->testedInstance)
-					->isEqualTo($this->newTestedInstance($blockForValue, $blockIfNoValue))
-				->mock($blockForValue)
+					->isEqualTo($this->newTestedInstance($noBinding))
+				->mock($future)
 					->receive('blockArgumentsAre')
 						->never
-				->mock($blockIfNoValue)
+				->mock($noBinding)
 					->receive('blockArgumentsAre')
 						->once
 
@@ -41,15 +42,16 @@ class block extends units\test
 				}
 			)
 			->if(
-				$this->testedInstance->blockIs($block)
+				$this->testedInstance->futureForblockIs($block, $future)
 			)
 			->then
 				->object($this->testedInstance)
-					->isEqualTo($this->newTestedInstance($blockForValue, $blockIfNoValue))
-				->mock($blockForValue)
+					->isEqualTo($this->newTestedInstance($noBinding))
+				->mock($future)
 					->receive('blockArgumentsAre')
-						->once
-				->mock($blockIfNoValue)
+						->withArguments($value)
+							->once
+				->mock($noBinding)
 					->receive('blockArgumentsAre')
 						->once
 		;

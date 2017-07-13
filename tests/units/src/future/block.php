@@ -14,23 +14,24 @@ class block extends units\test
 		;
 	}
 
-	function testBlockIs()
+	function testFutureForBlockIs()
 	{
 		$this
 			->given(
-				$this->newTestedInstance($blockForValue = new mockOfTicTacToe\block, $blockIfNoBinding = new mockOfTicTacToe\block),
-				$block = new mockOfTicTacToe\block
+				$this->newTestedInstance($noBinding = new mockOfTicTacToe\block),
+				$block = new mockOfTicTacToe\block,
+				$future = new mockOfTicTacToe\block
 			)
 			->if(
-				$this->testedInstance->blockIs($block)
+				$this->testedInstance->futureForblockIs($block, $future)
 			)
 			->then
 				->object($this->testedInstance)
-					->isEqualTo($this->newTestedInstance($blockForValue, $blockIfNoBinding))
-				->mock($blockForValue)
+					->isEqualTo($this->newTestedInstance($noBinding))
+				->mock($future)
 					->receive('blockArgumentsAre')
 						->never
-				->mock($blockIfNoBinding)
+				->mock($noBinding)
 					->receive('blockArgumentsAre')
 						->once
 
@@ -38,38 +39,38 @@ class block extends units\test
 				$value = uniqid(),
 
 				$this->calling($block)->blockArgumentsAre = function($future) use ($value) {
-					$future->valueIs($value);
+					$future->valueForFutureIs($value);
 				}
 			)
 			->if(
-				$this->testedInstance->blockIs($block)
+				$this->testedInstance->futureForBlockIs($block, $future)
 			)
 			->then
 				->object($this->testedInstance)
-					->isEqualTo($this->newTestedInstance($blockForValue, $blockIfNoBinding))
-				->mock($blockForValue)
+					->isEqualTo($this->newTestedInstance($noBinding))
+				->mock($future)
 					->receive('blockArgumentsAre')
 						->withArguments($value)
 							->once
-				->mock($blockIfNoBinding)
+				->mock($noBinding)
 					->receive('blockArgumentsAre')
 						->once
 		;
 	}
 
-	function testValueIs()
+	function testValueForFutureIs()
 	{
 		$this
 			->given(
-				$this->newTestedInstance($blockForValue = new mockOfTicTacToe\block, $blockIfNoBinding = new mockOfTicTacToe\block),
+				$this->newTestedInstance($noBinding = new mockOfTicTacToe\block),
 				$value = uniqid()
 			)
 			->if(
-				$this->testedInstance->valueIs($value)
+				$this->testedInstance->valueForFutureIs($value)
 			)
 			->then
 				->object($this->testedInstance)
-					->isEqualTo($this->newTestedInstance($blockForValue, $blockIfNoBinding))
+					->isEqualTo($this->newTestedInstance($noBinding))
 		;
 	}
 }

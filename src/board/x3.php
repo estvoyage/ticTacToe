@@ -44,40 +44,22 @@ class x3
 	function recipientOfTicTacToeBoardWithSymbolAtCoordinateIs(symbol $symbol, coordinate $coordinate, board\recipient $recipient) :void
 	{
 		(
-			new matrix\value\recipient\future\functor(
-				function($symbolInMatrix) use ($symbol, $coordinate, $recipient)
-				{
-					(new symbol\comparison\unary\name\undefined)
-						->recipientOfComparisonWithTicTacToeSymbolIs(
-							$symbolInMatrix,
-							new condition\ifTrue\functor(
-								function() use ($symbol, $coordinate, $recipient)
-								{
-									$this
-										->recipientForBoardWithSymbolAtCoordinateIs(
-											$symbol,
-											$coordinate,
-											$recipient
-										)
-									;
-								}
+			new matrix\value\recipient\future\block(
+				new block\functor(
+					function() use ($symbol, $coordinate, $recipient)
+					{
+						$this
+							->recipientForBoardWithSymbolAtCoordinateIs(
+								$symbol,
+								$coordinate,
+								$recipient
 							)
-						)
-					;
-				},
-				function() use ($symbol, $coordinate, $recipient)
-				{
-					$this
-						->recipientForBoardWithSymbolAtCoordinateIs(
-							$symbol,
-							$coordinate,
-							$recipient
-						)
-					;
-				}
+						;
+					}
+				)
 			)
 		)
-			->blockIs(
+			->futureForblockIs(
 				new block\functor(
 					function($symbolRecipient) use ($coordinate)
 					{
@@ -85,6 +67,28 @@ class x3
 							->recipientOfMatrixValueAtCoordinateIs(
 								$coordinate,
 								$symbolRecipient
+							)
+						;
+					}
+				),
+				new block\functor(
+					function($symbolInMatrix) use ($symbol, $coordinate, $recipient)
+					{
+						(new symbol\comparison\unary\name\undefined)
+							->recipientOfComparisonWithTicTacToeSymbolIs(
+								$symbolInMatrix,
+								new condition\ifTrue\functor(
+									function() use ($symbol, $coordinate, $recipient)
+									{
+										$this
+											->recipientForBoardWithSymbolAtCoordinateIs(
+												$symbol,
+												$coordinate,
+												$recipient
+											)
+										;
+									}
+								)
 							)
 						;
 					}
