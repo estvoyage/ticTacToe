@@ -19,12 +19,12 @@ class key
 	{
 		$this->coordinate
 			->recipientOfRowInMatrixIs(
-				new matrix\coordinate\row\recipient\functor(
+				new matrix\coordinate\distance\recipient\functor(
 					function($coordinateRow) use ($dimension)
 					{
 						$this->coordinate
 							->recipientOfColumnInMatrixIs(
-								new matrix\coordinate\column\recipient\functor(
+								new matrix\coordinate\distance\recipient\functor(
 									function($coordinateColumn) use ($dimension, $coordinateRow)
 									{
 										$dimension

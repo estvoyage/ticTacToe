@@ -42,10 +42,10 @@ class any extends units\test
 
 				$coordinate = new mockOfTicTacToe\matrix\coordinate,
 				$this->calling($coordinate)->recipientOfRowInMatrixIs = function($recipient) {
-					$recipient->rowInMatrixIs(new matrix\coordinate\distance\any(0));
+					$recipient->matrixCoordinateHasDistance(new matrix\coordinate\distance\any(0));
 				},
 				$this->calling($coordinate)->recipientOfColumnInMatrixIs = function($recipient) {
-					$recipient->columnInMatrixIs(new matrix\coordinate\distance\any(0));
+					$recipient->matrixCoordinateHasDistance(new matrix\coordinate\distance\any(0));
 				},
 
 				$recipient = new mockOfTicTacToe\matrix\recipient,
@@ -82,10 +82,10 @@ class any extends units\test
 			->given(
 				$coordinate = new mockOfTicTacToe\matrix\coordinate,
 				$this->calling($coordinate)->recipientOfRowInMatrixIs = function($recipient) {
-					$recipient->rowInMatrixIs(new matrix\coordinate\distance\any(0));
+					$recipient->matrixCoordinateHasDistance(new matrix\coordinate\distance\any(0));
 				},
 				$this->calling($coordinate)->recipientOfColumnInMatrixIs = function($recipient) {
-					$recipient->columnInMatrixIs(new matrix\coordinate\distance\any(0));
+					$recipient->matrixCoordinateHasDistance(new matrix\coordinate\distance\any(0));
 				},
 
 				$recipient = new mockOfTicTacToe\matrix\value\recipient,

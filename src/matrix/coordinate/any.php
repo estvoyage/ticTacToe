@@ -17,13 +17,13 @@ class any
 		$this->column = $column;
 	}
 
-	function recipientOfRowInMatrixIs(matrix\coordinate\row\recipient $recipient) :void
+	function recipientOfRowInMatrixIs(matrix\coordinate\distance\recipient $recipient) :void
 	{
-		$recipient->rowInMatrixIs($this->row);
+		$recipient->matrixCoordinateHasDistance($this->row);
 	}
 
-	function recipientOfColumnInMatrixIs(matrix\coordinate\column\recipient $recipient) :void
+	function recipientOfColumnInMatrixIs(matrix\coordinate\distance\recipient $recipient) :void
 	{
-		$recipient->columnInMatrixIs($this->column);
+		$recipient->matrixCoordinateHasDistance($this->column);
 	}
 }

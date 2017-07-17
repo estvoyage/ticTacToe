@@ -19,7 +19,7 @@ class any extends units\test
 		$this
 			->given(
 				$this->newTestedInstance($row = new mockOfTicTacToe\matrix\coordinate\distance, $column = new mockOfTicTacToe\matrix\coordinate\distance),
-				$recipient = new mockOfTicTacToe\matrix\coordinate\row\recipient
+				$recipient = new mockOfTicTacToe\matrix\coordinate\distance\recipient
 			)
 			->if(
 				$this->testedInstance->recipientOfRowInMatrixIs($recipient)
@@ -28,7 +28,7 @@ class any extends units\test
 				->object($this->testedInstance)
 					->isEqualTo($this->newTestedInstance($row, $column))
 				->mock($recipient)
-					->receive('rowInMatrixIs')
+					->receive('matrixCoordinateHasDistance')
 						->withArguments($row)
 							->once
 		;
@@ -39,7 +39,7 @@ class any extends units\test
 		$this
 			->given(
 				$this->newTestedInstance($row = new mockOfTicTacToe\matrix\coordinate\distance, $column = new mockOfTicTacToe\matrix\coordinate\distance),
-				$recipient = new mockOfTicTacToe\matrix\coordinate\column\recipient
+				$recipient = new mockOfTicTacToe\matrix\coordinate\distance\recipient
 			)
 			->if(
 				$this->testedInstance->recipientOfColumnInMatrixIs($recipient)
@@ -48,7 +48,7 @@ class any extends units\test
 				->object($this->testedInstance)
 					->isEqualTo($this->newTestedInstance($row, $column))
 				->mock($recipient)
-					->receive('columnInMatrixIs')
+					->receive('matrixCoordinateHasDistance')
 						->withArguments($column)
 							->once
 		;

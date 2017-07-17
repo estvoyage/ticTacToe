@@ -4,6 +4,6 @@ use estvoyage\ticTacToe\matrix;
 
 interface coordinate
 {
-	function recipientOfRowInMatrixIs(matrix\coordinate\row\recipient $recipient) :void;
-	function recipientOfColumnInMatrixIs(matrix\coordinate\column\recipient $recipient) :void;
+	function recipientOfRowInMatrixIs(matrix\coordinate\distance\recipient $recipient) :void;
+	function recipientOfColumnInMatrixIs(matrix\coordinate\distance\recipient $recipient) :void;
 }

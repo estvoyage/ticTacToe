@@ -47,10 +47,10 @@ class x3 extends units\test
 
 				$coordinate = new mockOfTicTacToe\coordinate,
 				$this->calling($coordinate)->recipientOfRowInMatrixIs = function($recipient) use ($row) {
-					$recipient->rowInMatrixIs($row);
+					$recipient->matrixCoordinateHasDistance($row);
 				},
 				$this->calling($coordinate)->recipientOfColumnInMatrixIs = function($recipient) use ($column) {
-					$recipient->columnInMatrixIs($column);
+					$recipient->matrixCoordinateHasDistance($column);
 				},
 
 				$recipient = new mockOfTicTacToe\symbol\recipient
@@ -99,10 +99,10 @@ class x3 extends units\test
 
 				$coordinate = new mockOfTicTacToe\coordinate,
 				$this->calling($coordinate)->recipientOfRowInMatrixIs = function($recipient) use ($row) {
-					$recipient->rowInMatrixIs($row);
+					$recipient->matrixCoordinateHasDistance($row);
 				},
 				$this->calling($coordinate)->recipientOfColumnInMatrixIs = function($recipient) use ($column) {
-					$recipient->columnInMatrixIs($column);
+					$recipient->matrixCoordinateHasDistance($column);
 				},
 
 				$symbol = new mockOfTicTacToe\symbol,
@@ -179,10 +179,10 @@ class x3 extends units\test
 
 				$coordinate = new mockOfTicTacToe\coordinate,
 				$this->calling($coordinate)->recipientOfRowInMatrixIs = function($recipient) use ($row) {
-					$recipient->rowInMatrixIs($row);
+					$recipient->matrixCoordinateHasDistance($row);
 				},
 				$this->calling($coordinate)->recipientOfColumnInMatrixIs = function($recipient) use ($column) {
-					$recipient->columnInMatrixIs($column);
+					$recipient->matrixCoordinateHasDistance($column);
 				},
 
 				$symbol = new mockOfTicTacToe\symbol,
@@ -253,10 +253,10 @@ class x3 extends units\test
 
 				$coordinate = new mockOfTicTacToe\coordinate,
 				$this->calling($coordinate)->recipientOfRowInMatrixIs = function($recipient) use ($row) {
-					$recipient->rowInMatrixIs($row);
+					$recipient->matrixCoordinateHasDistance($row);
 				},
 				$this->calling($coordinate)->recipientOfColumnInMatrixIs = function($recipient) use ($column) {
-					$recipient->columnInMatrixIs($column);
+					$recipient->matrixCoordinateHasDistance($column);
 				},
 
 				$recipient = new mockOfTicTacToe\board\recipient
