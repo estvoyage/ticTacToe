@@ -1,28 +1,144 @@
 <?php namespace estvoyage\ticTacToe\matrix;
 
-use estvoyage\ticTacToe\{ matrix, ninteger, block, buffer };
+use estvoyage\ticTacToe\{ matrix, ninteger, block, condition };
 
 class any
 	implements
 		matrix
 {
 	private
-		$dimension,
+		$maxCoordinate,
 		$values
 	;
 
-	function __construct(matrix\dimension $dimension, ... $values)
+	function __construct(matrix\coordinate $maxCoordinate, matrix\value... $values)
 	{
-		$this->dimension = $dimension;
+		$this->maxCoordinate = $maxCoordinate;
 
-		$this->dimension
-			->recipientOfMatrixSizeIs(
-				new matrix\size\any,
-				new matrix\size\recipient\converter\ninteger(
-					new ninteger\recipient\functor(
-						function($size) use ($values)
+		foreach ($values as $value)
+		{
+			$value
+				->recipientOfMatrixCoordinateIs(
+					new matrix\coordinate\recipient\functor(
+						function($coordinate) use ($value)
 						{
-							$this->values = array_slice($values, 0, $size);
+							$this->blockForCoordinateIs(
+								$coordinate,
+								new block\functor(
+									function($row, $column) use ($value)
+									{
+										$value
+											->recipientOfMatrixValueIs(
+												new matrix\value\recipient\functor(
+													function($value) use ($row, $column)
+													{
+														self::matrixWithValueAtRowAndColumnIs(
+															$value,
+															$row,
+															$column,
+															$this
+														);
+													}
+												)
+											)
+										;
+									}
+								)
+							);
+						}
+					)
+				)
+			;
+		}
+	}
+
+	function recipientOfValueInMatrixAtCoordinateIs(matrix\coordinate $coordinate, matrix\value\recipient $recipient) :void
+	{
+		self::blockForCoordinateIs(
+			$coordinate,
+			new block\functor(
+				function($row, $column) use ($recipient)
+				{
+					if (isset($this->values[$row][$column]))
+					{
+						$recipient
+							->matrixValueIs(
+								$this->values[$row][$column]
+							)
+						;
+					}
+				}
+			)
+		);
+	}
+
+	function recipientOfMatrixWithValueAtCoordinateIs($value, matrix\coordinate $coordinate, matrix\recipient $recipient) :void
+	{
+		$this->blockForCoordinateIs(
+			$coordinate,
+			new block\functor(
+				function($row, $column) use ($value, $recipient)
+				{
+					$recipient
+						->matrixIs(
+							self::matrixWithValueAtRowAndColumnIs($value, $row, $column, clone $this)
+						)
+					;
+				}
+			)
+		);
+	}
+
+	private function blockForCoordinateIs(matrix\coordinate $coordinate, block $block) :void
+	{
+		(new matrix\coordinate\comparison\unary\lessThanOrEqualTo($this->maxCoordinate))
+			->conditionOfComparisonWithMatrixCoordinateIs(
+				$coordinate,
+				new condition\ifTrue(
+					new block\functor(
+						function() use ($coordinate, $block) {
+							$coordinate
+								->recipientOfDistanceInMatrixRowIs(
+									new matrix\coordinate\distance\recipient\functor(
+										function($row) use ($coordinate, $block)
+										{
+											$coordinate
+												->recipientOfDistanceInMatrixColumnIs(
+													new matrix\coordinate\distance\recipient\functor(
+														function($column) use ($row, $block)
+														{
+															$row
+																->recipientOfNIntegerGreaterThanZeroIs(
+																	new ninteger\recipient\functor(
+																		function($row) use ($column, $block)
+																		{
+																			$column
+																				->recipientOfNIntegerGreaterThanZeroIs(
+																					new ninteger\recipient\functor(
+																						function($column) use ($row, $block)
+																						{
+																							$block
+																								->blockArgumentsAre(
+																									$row,
+																									$column
+																								)
+																							;
+																						}
+																					)
+																				)
+																			;
+																		}
+																	)
+																)
+															;
+														}
+													)
+												)
+											;
+										}
+									)
+								)
+							;
 						}
 					)
 				)
@@ -30,60 +146,10 @@ class any
 		;
 	}
 
-	function recipientOfDimensionOfMatrixIs(matrix\dimension\recipient $recipient) :void
+	private static function matrixWithValueAtRowAndColumnIs($value, int $row, int $column, self $matrix) :self
 	{
-		$recipient->matrixHasDimension($this->dimension);
-	}
+		$matrix->values[$row][$column] = $value;
 
-	function recipientOfMatrixWithValueAtCoordinateIs($value, matrix\coordinate $coordinate, matrix\recipient $recipient) :void
-	{
-		$this->recipientOfKeyForCoordinateIs(
-			$coordinate,
-			new ninteger\recipient\functor(
-				function($key) use ($value, $recipient)
-				{
-					$matrix = clone $this;
-					$matrix->values[$key] = $value;
-
-					$recipient->matrixIs($matrix);
-				}
-			)
-		);
-	}
-
-	function recipientOfMatrixValueAtCoordinateIs(matrix\coordinate $coordinate, matrix\value\recipient $recipient) :void
-	{
-		$this->recipientOfKeyForCoordinateIs(
-			$coordinate,
-			new ninteger\recipient\functor(
-				function($key) use ($recipient)
-				{
-					if (isset($this->values[$key]))
-					{
-						$recipient->matrixValueIs($this->values[$key]);
-					}
-				}
-			)
-		);
-	}
-
-	private function recipientOfKeyForCoordinateIs(matrix\coordinate $coordinate, ninteger\recipient $recipient) :void
-	{
-		(
-			new matrix\dimension\converter\buffer\key(
-				new buffer\key\recipient\functor(
-					function($key) use ($recipient) {
-						$key
-							->recipientOfValueOfOIntegerIs(
-								$recipient
-							)
-						;
-					}
-				),
-				$coordinate
-			)
-		)
-			->matrixDimensionIs($this->dimension)
-		;
+		return $matrix;
 	}
 }

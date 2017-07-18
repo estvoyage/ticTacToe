@@ -4,5 +4,5 @@ use estvoyage\ticTacToe\matrix;
 
 interface recipient
 {
-	function matrixCoordinateHasDistance(matrix\coordinate\distance $distance) :void;
+	function distanceInMatrixIs(matrix\coordinate\distance $distance) :void;
 }

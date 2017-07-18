@@ -11,25 +11,34 @@ class x3
 	;
 
 	function __construct(
-		symbol $l0c0, symbol $l0c1, symbol $l0c2,
-		symbol $l1c0, symbol $l1c1, symbol $l1c2,
-		symbol $l2c0, symbol $l2c1, symbol $l2c2
+		symbol $l1c1, symbol $l1c2, symbol $l1c3,
+		symbol $l2c1, symbol $l2c2, symbol $l2c3,
+		symbol $l3c1, symbol $l3c2, symbol $l3c3
 	)
 	{
 		$this->symbols = new matrix\any(
-			new matrix\dimension\square(
-				new matrix\dimension\side\any(3)
+			new matrix\coordinate\any(
+				new matrix\coordinate\distance\any(3),
+				new matrix\coordinate\distance\any(3)
 			),
-			$l0c0, $l0c1, $l0c2,
-			$l1c0, $l1c1, $l1c2,
-			$l2c0, $l2c1, $l2c2
+			new matrix\value\any($l1c1, new matrix\coordinate\any(new matrix\coordinate\distance\any(1), new matrix\coordinate\distance\any(1))),
+			new matrix\value\any($l1c2, new matrix\coordinate\any(new matrix\coordinate\distance\any(1), new matrix\coordinate\distance\any(2))),
+			new matrix\value\any($l1c3, new matrix\coordinate\any(new matrix\coordinate\distance\any(1), new matrix\coordinate\distance\any(3))),
+
+			new matrix\value\any($l2c1, new matrix\coordinate\any(new matrix\coordinate\distance\any(2), new matrix\coordinate\distance\any(1))),
+			new matrix\value\any($l2c2, new matrix\coordinate\any(new matrix\coordinate\distance\any(2), new matrix\coordinate\distance\any(2))),
+			new matrix\value\any($l2c3, new matrix\coordinate\any(new matrix\coordinate\distance\any(2), new matrix\coordinate\distance\any(3))),
+
+			new matrix\value\any($l3c1, new matrix\coordinate\any(new matrix\coordinate\distance\any(3), new matrix\coordinate\distance\any(1))),
+			new matrix\value\any($l3c2, new matrix\coordinate\any(new matrix\coordinate\distance\any(3), new matrix\coordinate\distance\any(2))),
+			new matrix\value\any($l3c3, new matrix\coordinate\any(new matrix\coordinate\distance\any(3), new matrix\coordinate\distance\any(3)))
 		);
 	}
 
 	function recipientOfTicTacToeSymbolAtCoordinateIs(coordinate $coordinate, symbol\recipient $recipient) :void
 	{
 		$this->symbols
-			->recipientOfMatrixValueAtCoordinateIs(
+			->recipientOfValueInMatrixAtCoordinateIs(
 				$coordinate,
 				new matrix\value\recipient\functor(
 					function($symbol) use ($recipient)
@@ -64,7 +73,7 @@ class x3
 					function($symbolRecipient) use ($coordinate)
 					{
 						$this->symbols
-							->recipientOfMatrixValueAtCoordinateIs(
+							->recipientOfValueInMatrixAtCoordinateIs(
 								$coordinate,
 								$symbolRecipient
 							)

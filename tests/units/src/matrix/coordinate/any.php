@@ -14,7 +14,7 @@ class any extends units\test
 		;
 	}
 
-	function testRecipientOfRowInMatrixIs()
+	function testRecipientOfDistanceInMatrixRowIs()
 	{
 		$this
 			->given(
@@ -22,19 +22,19 @@ class any extends units\test
 				$recipient = new mockOfTicTacToe\matrix\coordinate\distance\recipient
 			)
 			->if(
-				$this->testedInstance->recipientOfRowInMatrixIs($recipient)
+				$this->testedInstance->recipientOfDistanceInMatrixRowIs($recipient)
 			)
 			->then
 				->object($this->testedInstance)
 					->isEqualTo($this->newTestedInstance($row, $column))
 				->mock($recipient)
-					->receive('matrixCoordinateHasDistance')
+					->receive('distanceInMatrixIs')
 						->withArguments($row)
 							->once
 		;
 	}
 
-	function testRecipientOfColumnInMatrixIs()
+	function testRecipientOfDistanceInMatrixColumnIs()
 	{
 		$this
 			->given(
@@ -42,13 +42,13 @@ class any extends units\test
 				$recipient = new mockOfTicTacToe\matrix\coordinate\distance\recipient
 			)
 			->if(
-				$this->testedInstance->recipientOfColumnInMatrixIs($recipient)
+				$this->testedInstance->recipientOfDistanceInMatrixColumnIs($recipient)
 			)
 			->then
 				->object($this->testedInstance)
 					->isEqualTo($this->newTestedInstance($row, $column))
 				->mock($recipient)
-					->receive('matrixCoordinateHasDistance')
+					->receive('distanceInMatrixIs')
 						->withArguments($column)
 							->once
 		;

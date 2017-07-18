@@ -1,9 +1,9 @@
 <?php namespace estvoyage\ticTacToe\matrix;
 
-use estvoyage\ticTacToe\matrix;
+use estvoyage\ticTacToe\matrix\coordinate\distance;
 
 interface coordinate
 {
-	function recipientOfRowInMatrixIs(matrix\coordinate\distance\recipient $recipient) :void;
-	function recipientOfColumnInMatrixIs(matrix\coordinate\distance\recipient $recipient) :void;
+	function recipientOfDistanceInMatrixRowIs(distance\recipient $recipient) :void;
+	function recipientOfDistanceInMatrixColumnIs(distance\recipient $recipient) :void;
 }

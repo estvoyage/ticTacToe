@@ -14,117 +14,149 @@ class any extends units\test
 		;
 	}
 
-	function testRecipientOfDimensionOfMatrixIs()
-	{
-		$this
-			->given(
-				$this->newTestedInstance($dimension = new mockOfTicTacToe\matrix\dimension),
-				$recipient = new mockOfTicTacToe\matrix\dimension\recipient
-			)
-			->if(
-				$this->testedInstance->recipientOfDimensionOfMatrixIs($recipient)
-			)
-			->then
-				->object($this->testedInstance)
-					->isEqualTo($this->newTestedInstance($dimension))
-				->mock($recipient)
-					->receive('matrixHasDimension')
-						->withArguments($dimension)
-							->once
-		;
-	}
-
 	function testRecipientOfMatrixWithValueAtCoordinateIs()
 	{
 		$this
 			->given(
-				$otherValue = 'bar',
+				$maxCoordinate = new mockOfTicTacToe\matrix\coordinate,
+				$this->calling($maxCoordinate)->recipientOfDistanceInMatrixRowIs = function($recipient) {
+					$recipient->distanceInMatrixIs(new matrix\coordinate\distance\any(3));
+				},
+				$this->calling($maxCoordinate)->recipientOfDistanceInMatrixColumnIs = function($recipient) {
+					$recipient->distanceInMatrixIs(new matrix\coordinate\distance\any(3));
+				},
 
 				$coordinate = new mockOfTicTacToe\matrix\coordinate,
-				$this->calling($coordinate)->recipientOfRowInMatrixIs = function($recipient) {
-					$recipient->matrixCoordinateHasDistance(new matrix\coordinate\distance\any(0));
-				},
-				$this->calling($coordinate)->recipientOfColumnInMatrixIs = function($recipient) {
-					$recipient->matrixCoordinateHasDistance(new matrix\coordinate\distance\any(0));
+
+				$row = rand(1, 3),
+				$this->calling($coordinate)->recipientOfDistanceInMatrixRowIs = function($recipient) use ($row) {
+					$recipient->distanceInMatrixIs(new matrix\coordinate\distance\any($row));
 				},
 
-				$recipient = new mockOfTicTacToe\matrix\recipient,
-
-				$dimension = new mockOfTicTacToe\matrix\dimension,
-				$this->calling($dimension)->recipientOfMatrixSizeIs = function($size, $recipient) {
-					$recipient->matrixSizeIs(new matrix\size\any(9));
-				},
-				$this->calling($dimension)->recipientOfNumberOfRowsInMatrixIs = function($recipient) {
-					$recipient->numberOfRowsInMatrixIs(new matrix\dimension\side\any(3));
-				},
-				$this->calling($dimension)->recipientOfNumberOfColumnsInMatrixIs = function($recipient) {
-					$recipient->numberOfColumnsInMatrixIs(new matrix\dimension\side\any(3));
+				$column = rand(1, 3),
+				$this->calling($coordinate)->recipientOfDistanceInMatrixColumnIs = function($recipient) use ($column) {
+					$recipient->distanceInMatrixIs(new matrix\coordinate\distance\any($column));
 				},
 
-				$this->newTestedInstance($dimension, $value = 'foo')
+				$value = new mockOfTicTacToe\matrix\value,
+				$this->calling($value)->recipientOfMatrixCoordinateIs = function($recipient) use ($coordinate) {
+					$recipient->matrixCoordinateIs($coordinate);
+				},
+				$this->calling($value)->recipientOfMatrixValueIs = function($recipient) {
+					$recipient->matrixValueIs('foo');
+				},
+
+				$this->newTestedInstance($maxCoordinate, $value),
+
+				$otherValue = 'bar',
+
+				$recipient = new mockOfTicTacToe\matrix\recipient
 			)
 			->if(
 				$this->testedInstance->recipientOfMatrixWithValueAtCoordinateIs($otherValue, $coordinate, $recipient)
 			)
 			->then
 				->object($this->testedInstance)
-					->isEqualTo($this->newTestedInstance($dimension, $value))
+					->isEqualTo($this->newTestedInstance($maxCoordinate, $value))
 				->mock($recipient)
 					->receive('matrixIs')
-						->withArguments($this->newTestedInstance($dimension, $otherValue))
+						->withArguments($this->newTestedInstance($maxCoordinate, new matrix\value\any($otherValue, $coordinate)))
 							->once
-		;
-	}
 
-	function testRecipientOfMatrixValueAtCoordinateIs()
-	{
-		$this
 			->given(
-				$coordinate = new mockOfTicTacToe\matrix\coordinate,
-				$this->calling($coordinate)->recipientOfRowInMatrixIs = function($recipient) {
-					$recipient->matrixCoordinateHasDistance(new matrix\coordinate\distance\any(0));
-				},
-				$this->calling($coordinate)->recipientOfColumnInMatrixIs = function($recipient) {
-					$recipient->matrixCoordinateHasDistance(new matrix\coordinate\distance\any(0));
+				$row = rand(4, PHP_INT_MAX),
+				$this->calling($coordinate)->recipientOfDistanceInMatrixRowIs = function($recipient) use ($row) {
+					$recipient->distanceInMatrixIs(new matrix\coordinate\distance\any($row));
 				},
 
-				$recipient = new mockOfTicTacToe\matrix\value\recipient,
-
-				$dimension = new mockOfTicTacToe\matrix\dimension,
-				$this->calling($dimension)->recipientOfMatrixSizeIs = function($size, $recipient) {
-					$recipient->matrixSizeIs(new matrix\size\any(9));
-				},
-				$this->calling($dimension)->recipientOfNumberOfRowsInMatrixIs = function($recipient) {
-					$recipient->numberOfRowsInMatrixIs(new matrix\dimension\side\any(3));
-				},
-				$this->calling($dimension)->recipientOfNumberOfColumnsInMatrixIs = function($recipient) {
-					$recipient->numberOfColumnsInMatrixIs(new matrix\dimension\side\any(3));
+				$column = rand(4, PHP_INT_MAX),
+				$this->calling($coordinate)->recipientOfDistanceInMatrixColumnIs = function($recipient) use ($column) {
+					$recipient->distanceInMatrixIs(new matrix\coordinate\distance\any($column));
 				},
 
-				$this->newTestedInstance($dimension)
+				$value = new mockOfTicTacToe\matrix\value,
+				$this->calling($value)->recipientOfMatrixCoordinateIs = function($recipient) use ($coordinate) {
+					$recipient->matrixCoordinateIs($coordinate);
+				},
+				$this->calling($value)->recipientOfMatrixValueIs = function($recipient) {
+					$recipient->matrixValueIs('foo');
+				},
+
+				$this->newTestedInstance($maxCoordinate, $value),
+
+				$recipient = new mockOfTicTacToe\matrix\recipient
 			)
 			->if(
-				$this->testedInstance->recipientOfMatrixValueAtCoordinateIs($coordinate, $recipient)
+				$this->testedInstance->recipientOfMatrixWithValueAtCoordinateIs($otherValue, $coordinate, $recipient)
 			)
 			->then
 				->object($this->testedInstance)
-					->isEqualTo($this->newTestedInstance($dimension))
+					->isEqualTo($this->newTestedInstance($maxCoordinate, $value))
+				->mock($recipient)
+					->receive('matrixIs')
+						->withArguments($this->newTestedInstance($maxCoordinate, new matrix\value\any($otherValue, $coordinate)))
+							->never
+		;
+	}
+
+	function testRecipientOfValueInMatrixAtCoordinateIs()
+	{
+		$this
+			->given(
+				$maxCoordinate = new mockOfTicTacToe\matrix\coordinate,
+				$this->calling($maxCoordinate)->recipientOfDistanceInMatrixRowIs = function($recipient) {
+					$recipient->distanceInMatrixIs(new matrix\coordinate\distance\any(3));
+				},
+				$this->calling($maxCoordinate)->recipientOfDistanceInMatrixColumnIs = function($recipient) {
+					$recipient->distanceInMatrixIs(new matrix\coordinate\distance\any(3));
+				},
+
+				$this->newTestedInstance($maxCoordinate),
+
+				$coordinate = new mockOfTicTacToe\matrix\coordinate,
+
+				$row = rand(1, 3),
+				$this->calling($coordinate)->recipientOfDistanceInMatrixRowIs = function($recipient) use ($row) {
+					$recipient->distanceInMatrixIs(new matrix\coordinate\distance\any($row));
+				},
+
+				$column = rand(1, 3),
+				$this->calling($coordinate)->recipientOfDistanceInMatrixColumnIs = function($recipient) use ($column) {
+					$recipient->distanceInMatrixIs(new matrix\coordinate\distance\any($column));
+				},
+
+				$recipient = new mockOfTicTacToe\matrix\value\recipient
+			)
+			->if(
+				$this->testedInstance->recipientOfValueInMatrixAtCoordinateIs($coordinate, $recipient)
+			)
+			->then
+				->object($this->testedInstance)
+					->isEqualTo($this->newTestedInstance($maxCoordinate))
 				->mock($recipient)
 					->receive('matrixValueIs')
 						->never
 
 			->given(
-				$this->newTestedInstance($dimension, $value = uniqid())
+				$value = new mockOfTicTacToe\matrix\value,
+				$this->calling($value)->recipientOfMatrixCoordinateIs = function($recipient) use ($coordinate) {
+					$recipient->matrixCoordinateIs($coordinate);
+				},
+				$this->calling($value)->recipientOfMatrixValueIs = function($recipient) {
+					$recipient->matrixValueIs('foo');
+				},
+
+				$this->newTestedInstance($maxCoordinate, $value)
 			)
 			->if(
-				$this->testedInstance->recipientOfMatrixValueAtCoordinateIs($coordinate, $recipient)
+				$this->testedInstance->recipientOfValueInMatrixAtCoordinateIs($coordinate, $recipient)
 			)
 			->then
 				->object($this->testedInstance)
-					->isEqualTo($this->newTestedInstance($dimension, $value))
+					->isEqualTo($this->newTestedInstance($maxCoordinate, $value))
 				->mock($recipient)
 					->receive('matrixValueIs')
-						->withArguments($value)
+						->withArguments('foo')
 							->once
 		;
 	}
