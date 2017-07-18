@@ -15,12 +15,7 @@ class lessThanOrEqualTo
 		$this->ninteger = $ninteger;
 	}
 
-	function recipientOfComparisonWithNIntegerIs(int $ninteger, ninteger\comparison\unary\recipient $recipient) :void
-	{
-
-	}
-
-	function recipientOfComparisonWithNIntegerIsCondition(int $ninteger, condition $condition) :void
+	function conditionOfComparisonWithNIntegerIs(int $ninteger, condition $condition) :void
 	{
 		$condition->nbooleanIs($ninteger <= $this->ninteger);
 	}

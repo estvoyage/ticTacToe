@@ -17,22 +17,7 @@ class any
 		$this->comparison = $comparison;
 	}
 
-	function recipientOfComparisonWithNIntegerIs(int $ninteger, comparison\unary\recipient $recipient) :void
-	{
-		$this
-			->recipientOfComparisonWithNIntegerIsCondition(
-				$ninteger,
-				new condition\functor(
-					function($boolean) use ($ninteger, $recipient)
-					{
-						$recipient->comparisonWithNIntegerIs($ninteger, $boolean);
-					}
-				)
-			)
-		;
-	}
-
-	function recipientOfComparisonWithNIntegerIsCondition(int $ninteger, condition $condition) :void
+	function conditionOfComparisonWithNIntegerIs(int $ninteger, condition $condition) :void
 	{
 		$this->comparison
 			->recipientOfComparisonBetweenNIntegerAndNIntegerIs(

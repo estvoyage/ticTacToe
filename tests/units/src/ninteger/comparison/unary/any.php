@@ -14,36 +14,7 @@ class any extends units\test
 		;
 	}
 
-	function testRecipientOfComparisonWithNIntegerIs()
-	{
-		$this
-			->given(
-				$this->newTestedInstance($ninteger = rand(PHP_INT_MIN, PHP_INT_MAX), $comparison = new mockOfTicTacToe\ninteger\comparison\binary),
-				$boolean = rand(0, 1) == 1,
-				$ninteger2 = rand(PHP_INT_MIN, PHP_INT_MAX),
-				$recipient = new mockOfTicTacToe\ninteger\comparison\unary\recipient,
-
-				$this->calling($comparison)->recipientOfComparisonBetweenNIntegerAndNIntegerIs = function($anNInteger1, $anNInteger2, $recipient) use ($ninteger, $ninteger2, $boolean) {
-					if ($ninteger == $anNInteger2 && $ninteger2 == $anNInteger1)
-					{
-						$recipient->nbooleanIs($boolean);
-					}
-				}
-			)
-			->if(
-				$this->testedInstance->recipientOfComparisonWithNIntegerIs($ninteger2, $recipient)
-			)
-			->then
-				->object($this->testedInstance)
-					->isEqualTo($this->newTestedInstance($ninteger, $comparison))
-				->mock($recipient)
-					->receive('comparisonWithNIntegerIs')
-						->withArguments($ninteger2, $boolean)
-							->once
-		;
-	}
-
-	function testRecipientOfComparisonWithNIntegerIsCondition()
+	function testConditionOfComparisonWithNIntegerIs()
 	{
 		$this
 			->given(
@@ -53,7 +24,7 @@ class any extends units\test
 				$condition = new mockOfTicTacToe\condition
 			)
 			->if(
-				$this->testedInstance->recipientOfComparisonWithNIntegerIsCondition($ninteger2, $condition)
+				$this->testedInstance->conditionOfComparisonWithNIntegerIs($ninteger2, $condition)
 			)
 			->then
 				->object($this->testedInstance)

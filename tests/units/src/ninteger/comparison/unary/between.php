@@ -17,30 +17,7 @@ class between extends units\test
 	/**
 	 * @dataProvider upDownNIntegerAndBooleanProvider
 	 */
-	function testRecipientOfComparisonWithNIntegerIs($up, $down, $ninteger, $boolean)
-	{
-		$this
-			->given(
-				$this->newTestedInstance($up, $down),
-				$recipient = new mockOfTicTacToe\ninteger\comparison\unary\recipient
-			)
-			->if(
-				$this->testedInstance->recipientOfComparisonWithNIntegerIs($ninteger, $recipient)
-			)
-			->then
-				->object($this->testedInstance)
-					->isEqualTo($this->newTestedInstance($up, $down))
-				->mock($recipient)
-					->receive('comparisonWithNIntegerIs')
-						->withArguments($ninteger, $boolean)
-							->once
-		;
-	}
-
-	/**
-	 * @dataProvider upDownNIntegerAndBooleanProvider
-	 */
-	function testRecipientOfComparisonWithNIntegerIsCondition($up, $down, $ninteger, $boolean)
+	function testConditionOfComparisonWithNIntegerIs($up, $down, $ninteger, $boolean)
 	{
 		$this
 			->given(
@@ -48,7 +25,7 @@ class between extends units\test
 				$condition = new mockOfTicTacToe\condition
 			)
 			->if(
-				$this->testedInstance->recipientOfComparisonWithNIntegerIsCondition($ninteger, $condition)
+				$this->testedInstance->conditionOfComparisonWithNIntegerIs($ninteger, $condition)
 			)
 			->then
 				->object($this->testedInstance)

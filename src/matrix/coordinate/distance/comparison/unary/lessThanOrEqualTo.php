@@ -26,7 +26,7 @@ class lessThanOrEqualTo
 									function($distance) use ($value, $condition)
 									{
 										(new ninteger\comparison\unary\lessThanOrEqualTo($value))
-											->recipientOfComparisonWithNIntegerIsCondition(
+											->conditionOfComparisonWithNIntegerIs(
 												$distance,
 												$condition
 											)

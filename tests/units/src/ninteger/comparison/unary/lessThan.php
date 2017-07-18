@@ -22,22 +22,22 @@ class lessThan extends units\test
 	/**
 	 * @dataProvider argumentsProvider
 	 */
-	function testRecipientOfComparisonWithNIntegerIs($ninteger1, $ninteger2, $boolean)
+	function testConditionOfComparisonWithNIntegerIs($ninteger1, $ninteger2, $boolean)
 	{
 		$this
 			->given(
 				$this->newTestedInstance($ninteger1),
-				$recipient = new mockOfTicTacToe\ninteger\comparison\unary\recipient
+				$condition = new mockOfTicTacToe\condition
 			)
 			->if(
-				$this->testedInstance->recipientOfComparisonWithNIntegerIs($ninteger2, $recipient)
+				$this->testedInstance->conditionOfComparisonWithNIntegerIs($ninteger2, $condition)
 			)
 			->then
 				->object($this->testedInstance)
 					->isEqualTo($this->newTestedInstance($ninteger1))
-				->mock($recipient)
-					->receive('comparisonWithNIntegerIs')
-						->withArguments($ninteger2, $boolean)
+				->mock($condition)
+					->receive('nbooleanIs')
+						->withArguments($boolean)
 							->once
 		;
 	}

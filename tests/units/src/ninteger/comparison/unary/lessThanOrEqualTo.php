@@ -14,7 +14,7 @@ class lessThanOrEqualTo extends units\test
 		;
 	}
 
-	function testRecipientOfComparisonWithNIntegerIsCondition()
+	function testConditionOfComparisonWithNIntegerIs()
 	{
 		$this
 			->given(
@@ -23,7 +23,7 @@ class lessThanOrEqualTo extends units\test
 				$condition = new mockOfTicTacToe\condition
 			)
 			->if(
-				$this->testedInstance->recipientOfComparisonWithNIntegerIsCondition($ninteger, $condition)
+				$this->testedInstance->conditionOfComparisonWithNIntegerIs($ninteger, $condition)
 			)
 			->then
 				->object($this->testedInstance)
@@ -37,7 +37,7 @@ class lessThanOrEqualTo extends units\test
 				$ninteger = PHP_INT_MAX
 			)
 			->if(
-				$this->testedInstance->recipientOfComparisonWithNIntegerIsCondition($ninteger, $condition)
+				$this->testedInstance->conditionOfComparisonWithNIntegerIs($ninteger, $condition)
 			)
 			->then
 				->object($this->testedInstance)
@@ -52,7 +52,7 @@ class lessThanOrEqualTo extends units\test
 				$ninteger = PHP_INT_MIN
 			)
 			->if(
-				$this->testedInstance->recipientOfComparisonWithNIntegerIsCondition($ninteger, $condition)
+				$this->testedInstance->conditionOfComparisonWithNIntegerIs($ninteger, $condition)
 			)
 			->then
 				->object($this->testedInstance)
@@ -66,7 +66,7 @@ class lessThanOrEqualTo extends units\test
 				$ninteger = rand(PHP_INT_MIN + 1, PHP_INT_MAX)
 			)
 			->if(
-				$this->testedInstance->recipientOfComparisonWithNIntegerIsCondition($ninteger, $condition)
+				$this->testedInstance->conditionOfComparisonWithNIntegerIs($ninteger, $condition)
 			)
 			->then
 				->object($this->testedInstance)
