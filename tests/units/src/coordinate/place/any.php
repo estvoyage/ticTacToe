@@ -1,6 +1,6 @@
-<?php namespace estvoyage\ticTacToe\tests\units\matrix\coordinate\distance;
+<?php namespace estvoyage\ticTacToe\tests\units\coordinate\place;
 
-require __DIR__ . '/../../../../runner.php';
+require __DIR__ . '/../../../runner.php';
 
 use estvoyage\ticTacToe\tests\units;
 use mock\estvoyage\ticTacToe as mockOfTicTacToe;
@@ -10,10 +10,9 @@ class any extends units\test
 	function testClass()
 	{
 		$this->testedClass
-			->implements('estvoyage\ticTacToe\matrix\coordinate\distance')
+			->implements('estvoyage\ticTacToe\coordinate\place')
 		;
 	}
-
 
 	/**
 	 * @dataProvider invalidValueProvider

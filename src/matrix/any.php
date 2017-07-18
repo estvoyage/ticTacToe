@@ -98,13 +98,13 @@ class any
 					new block\functor(
 						function() use ($coordinate, $block) {
 							$coordinate
-								->recipientOfDistanceInMatrixRowIs(
-									new matrix\coordinate\distance\recipient\functor(
+								->recipientOfPlaceInMatrixRowsIs(
+									new matrix\coordinate\place\recipient\functor(
 										function($row) use ($coordinate, $block)
 										{
 											$coordinate
-												->recipientOfDistanceInMatrixColumnIs(
-													new matrix\coordinate\distance\recipient\functor(
+												->recipientOfPlaceInMatrixColumnsIs(
+													new matrix\coordinate\place\recipient\functor(
 														function($column) use ($row, $block)
 														{
 															$row

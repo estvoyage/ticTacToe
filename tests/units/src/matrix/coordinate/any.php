@@ -14,42 +14,64 @@ class any extends units\test
 		;
 	}
 
-	function testRecipientOfDistanceInMatrixRowIs()
+	function testRecipientOfPlaceInMatrixRowsIs()
 	{
 		$this
 			->given(
-				$this->newTestedInstance($row = new mockOfTicTacToe\matrix\coordinate\distance, $column = new mockOfTicTacToe\matrix\coordinate\distance),
-				$recipient = new mockOfTicTacToe\matrix\coordinate\distance\recipient
+				$this->newTestedInstance($row = new mockOfTicTacToe\matrix\coordinate\place, $column = new mockOfTicTacToe\matrix\coordinate\place),
+				$recipient = new mockOfTicTacToe\matrix\coordinate\place\recipient
 			)
 			->if(
-				$this->testedInstance->recipientOfDistanceInMatrixRowIs($recipient)
+				$this->testedInstance->recipientOfPlaceInMatrixRowsIs($recipient)
 			)
 			->then
 				->object($this->testedInstance)
 					->isEqualTo($this->newTestedInstance($row, $column))
 				->mock($recipient)
-					->receive('distanceInMatrixIs')
+					->receive('placeInMatrixIs')
 						->withArguments($row)
 							->once
 		;
 	}
 
-	function testRecipientOfDistanceInMatrixColumnIs()
+	function testRecipientOfPlaceInMatrixColumnsIs()
 	{
 		$this
 			->given(
-				$this->newTestedInstance($row = new mockOfTicTacToe\matrix\coordinate\distance, $column = new mockOfTicTacToe\matrix\coordinate\distance),
-				$recipient = new mockOfTicTacToe\matrix\coordinate\distance\recipient
+				$this->newTestedInstance($row = new mockOfTicTacToe\matrix\coordinate\place, $column = new mockOfTicTacToe\matrix\coordinate\place),
+				$recipient = new mockOfTicTacToe\matrix\coordinate\place\recipient
 			)
 			->if(
-				$this->testedInstance->recipientOfDistanceInMatrixColumnIs($recipient)
+				$this->testedInstance->recipientOfPlaceInMatrixColumnsIs($recipient)
 			)
 			->then
 				->object($this->testedInstance)
 					->isEqualTo($this->newTestedInstance($row, $column))
 				->mock($recipient)
-					->receive('distanceInMatrixIs')
+					->receive('placeInMatrixIs')
 						->withArguments($column)
+							->once
+		;
+	}
+
+	function testRecipientOfMatrixCoordinateWithRowAndColumnIs()
+	{
+		$this
+			->given(
+				$this->newTestedInstance($row = new mockOfTicTacToe\matrix\coordinate\place, $column = new mockOfTicTacToe\matrix\coordinate\place),
+				$otherRow = new mockOfTicTacToe\matrix\coordinate\place,
+				$otherColumn = new mockOfTicTacToe\matrix\coordinate\place,
+				$recipient = new mockOfTicTacToe\matrix\coordinate\recipient
+			)
+			->if(
+				$this->testedInstance->recipientOfMatrixCoordinateWithRowAndColumnIs($otherRow, $otherColumn, $recipient)
+			)
+			->then
+				->object($this->testedInstance)
+					->isEqualTo($this->newTestedInstance($row, $column))
+				->mock($recipient)
+					->receive('matrixCoordinateIs')
+						->withArguments($this->newTestedInstance($otherRow, $otherColumn))
 							->once
 		;
 	}

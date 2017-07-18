@@ -1,29 +1,38 @@
 <?php namespace estvoyage\ticTacToe\matrix\coordinate;
 
-use estvoyage\ticTacToe\matrix;
+use estvoyage\ticTacToe\matrix\coordinate;
 
 class any
 	implements
-		matrix\coordinate
+		coordinate
 {
 	private
 		$row,
 		$column
 	;
 
-	function __construct(matrix\coordinate\distance $row, matrix\coordinate\distance $column)
+	function __construct(coordinate\place $row, coordinate\place $column)
 	{
 		$this->row = $row;
 		$this->column = $column;
 	}
 
-	function recipientOfDistanceInMatrixRowIs(matrix\coordinate\distance\recipient $recipient) :void
+	function recipientOfPlaceInMatrixRowsIs(coordinate\place\recipient $recipient) :void
 	{
-		$recipient->distanceInMatrixIs($this->row);
+		$recipient->placeInMatrixIs($this->row);
 	}
 
-	function recipientOfDistanceInMatrixColumnIs(matrix\coordinate\distance\recipient $recipient) :void
+	function recipientOfPlaceInMatrixColumnsIs(coordinate\place\recipient $recipient) :void
 	{
-		$recipient->distanceInMatrixIs($this->column);
+		$recipient->placeInMatrixIs($this->column);
+	}
+
+	function recipientOfMatrixCoordinateWithRowAndColumnIs(coordinate\place $row, coordinate\place $column, coordinate\recipient $recipient) :void
+	{
+		$self = clone $this;
+		$self->row = $row;
+		$self->column = $column;
+
+		$recipient->matrixCoordinateIs($self);
 	}
 }

@@ -1,8 +1,8 @@
-<?php namespace estvoyage\ticTacToe\matrix\coordinate;
+<?php namespace estvoyage\ticTacToe\coordinate;
 
 use estvoyage\ticTacToe\ninteger;
 
-interface distance
+interface place
 {
 	function recipientOfNIntegerGreaterThanZeroIs(ninteger\recipient $recipient) :void;
 }

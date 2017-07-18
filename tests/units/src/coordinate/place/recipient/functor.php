@@ -1,6 +1,6 @@
-<?php namespace estvoyage\ticTacToe\tests\units\matrix\coordinate\distance\recipient;
+<?php namespace estvoyage\ticTacToe\tests\units\coordinate\place\recipient;
 
-require __DIR__ . '/../../../../../runner.php';
+require __DIR__ . '/../../../../runner.php';
 
 use estvoyage\ticTacToe\tests\units;
 use mock\estvoyage\ticTacToe as mockOfTicTacToe;
@@ -10,25 +10,25 @@ class functor extends units\test
 	function testClass()
 	{
 		$this->testedClass
-			->implements('estvoyage\ticTacToe\matrix\coordinate\distance\recipient')
+			->implements('estvoyage\ticTacToe\coordinate\place\recipient')
 		;
 	}
 
-	function testDistanceInMatrixIs()
+	function testPlaceInTicTacToeBoardIs()
 	{
 		$this
 			->given(
 				$this->newTestedInstance($callable = function() use (& $arguments) { $arguments = func_get_args(); }),
-				$distance = new mockOfTicTacToe\matrix\coordinate\distance
+				$place = new mockOfTicTacToe\coordinate\place
 			)
 			->if(
-				$this->testedInstance->distanceInMatrixIs($distance)
+				$this->testedInstance->placeInTicTacToeBoardIs($place)
 			)
 			->then
 				->object($this->testedInstance)
 					->isEqualTo($this->newTestedInstance($callable))
 				->array($arguments)
-					->isEqualTo([ $distance ])
+					->isEqualTo([ $place ])
 		;
 	}
 }

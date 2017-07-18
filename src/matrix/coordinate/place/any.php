@@ -1,10 +1,10 @@
-<?php namespace estvoyage\ticTacToe\matrix\coordinate\distance;
+<?php namespace estvoyage\ticTacToe\matrix\coordinate\place;
 
 use estvoyage\ticTacToe\{ matrix, ointeger, ninteger, condition };
 
 class any
 	implements
-		matrix\coordinate\distance
+		matrix\coordinate\place
 {
 	private
 		$ointeger

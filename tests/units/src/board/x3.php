@@ -35,22 +35,22 @@ class x3 extends units\test
 
 				$this->newTestedInstance(... $symbols),
 
-				$row = new mockOfTicTacToe\matrix\coordinate\distance,
+				$row = new mockOfTicTacToe\coordinate\place,
 				$this->calling($row)->recipientOfNIntegerGreaterThanZeroIs = function($recipient) use ($rowValue) {
 					$recipient->nintegerIs($rowValue);
 				},
 
-				$column = new mockOfTicTacToe\matrix\coordinate\distance,
+				$column = new mockOfTicTacToe\coordinate\place,
 				$this->calling($column)->recipientOfNIntegerGreaterThanZeroIs = function($recipient) use ($columnValue) {
 					$recipient->nintegerIs($columnValue);
 				},
 
 				$coordinate = new mockOfTicTacToe\coordinate,
-				$this->calling($coordinate)->recipientOfDistanceInMatrixRowIs = function($recipient) use ($row) {
-					$recipient->distanceInMatrixIs($row);
+				$this->calling($coordinate)->recipientOfPlaceInTicTacToeBoardRowsIs = function($recipient) use ($row) {
+					$recipient->placeInTicTacToeBoardIs($row);
 				},
-				$this->calling($coordinate)->recipientOfDistanceInMatrixColumnIs = function($recipient) use ($column) {
-					$recipient->distanceInMatrixIs($column);
+				$this->calling($coordinate)->recipientOfPlaceInTicTacToeBoardColumnsIs = function($recipient) use ($column) {
+					$recipient->placeInTicTacToeBoardIs($column);
 				},
 
 				$recipient = new mockOfTicTacToe\symbol\recipient
@@ -87,22 +87,22 @@ class x3 extends units\test
 					$l3c3 = new mockOfTicTacToe\symbol
 				),
 
-				$row = new mockOfTicTacToe\matrix\coordinate\distance,
+				$row = new mockOfTicTacToe\coordinate\place,
 				$this->calling($row)->recipientOfNIntegerGreaterThanZeroIs = function($recipient) use ($rowValue) {
 					$recipient->nintegerIs($rowValue);
 				},
 
-				$column = new mockOfTicTacToe\matrix\coordinate\distance,
+				$column = new mockOfTicTacToe\coordinate\place,
 				$this->calling($column)->recipientOfNIntegerGreaterThanZeroIs = function($recipient) use ($columnValue) {
 					$recipient->nintegerIs($columnValue);
 				},
 
 				$coordinate = new mockOfTicTacToe\coordinate,
-				$this->calling($coordinate)->recipientOfDistanceInMatrixRowIs = function($recipient) use ($row) {
-					$recipient->distanceInMatrixIs($row);
+				$this->calling($coordinate)->recipientOfPlaceInTicTacToeBoardRowsIs = function($recipient) use ($row) {
+					$recipient->placeInTicTacToeBoardIs($row);
 				},
-				$this->calling($coordinate)->recipientOfDistanceInMatrixColumnIs = function($recipient) use ($column) {
-					$recipient->distanceInMatrixIs($column);
+				$this->calling($coordinate)->recipientOfPlaceInTicTacToeBoardColumnsIs = function($recipient) use ($column) {
+					$recipient->placeInTicTacToeBoardIs($column);
 				},
 
 				$symbol = new mockOfTicTacToe\symbol,
@@ -167,22 +167,22 @@ class x3 extends units\test
 
 				$this->newTestedInstance(... $symbols),
 
-				$row = new mockOfTicTacToe\matrix\coordinate\distance,
+				$row = new mockOfTicTacToe\coordinate\place,
 				$this->calling($row)->recipientOfNIntegerGreaterThanZeroIs = function($recipient) use ($rowValue) {
 					$recipient->nintegerIs($rowValue);
 				},
 
-				$column = new mockOfTicTacToe\matrix\coordinate\distance,
+				$column = new mockOfTicTacToe\coordinate\place,
 				$this->calling($column)->recipientOfNIntegerGreaterThanZeroIs = function($recipient) use ($columnValue) {
 					$recipient->nintegerIs($columnValue);
 				},
 
 				$coordinate = new mockOfTicTacToe\coordinate,
-				$this->calling($coordinate)->recipientOfDistanceInMatrixRowIs = function($recipient) use ($row) {
-					$recipient->distanceInMatrixIs($row);
+				$this->calling($coordinate)->recipientOfPlaceInTicTacToeBoardRowsIs = function($recipient) use ($row) {
+					$recipient->placeInTicTacToeBoardIs($row);
 				},
-				$this->calling($coordinate)->recipientOfDistanceInMatrixColumnIs = function($recipient) use ($column) {
-					$recipient->distanceInMatrixIs($column);
+				$this->calling($coordinate)->recipientOfPlaceInTicTacToeBoardColumnsIs = function($recipient) use ($column) {
+					$recipient->placeInTicTacToeBoardIs($column);
 				},
 
 				$symbol = new mockOfTicTacToe\symbol,
@@ -241,22 +241,22 @@ class x3 extends units\test
 					$recipient->ticTacToeSymbolIsX();
 				},
 
-				$row = new mockOfTicTacToe\matrix\coordinate\distance,
+				$row = new mockOfTicTacToe\coordinate\place,
 				$this->calling($row)->recipientOfNIntegerGreaterThanZeroIs = function($recipient) use ($rowValue) {
 					$recipient->nintegerIs($rowValue);
 				},
 
-				$column = new mockOfTicTacToe\matrix\coordinate\distance,
+				$column = new mockOfTicTacToe\coordinate\place,
 				$this->calling($column)->recipientOfNIntegerGreaterThanZeroIs = function($recipient) use ($columnValue) {
 					$recipient->nintegerIs($columnValue);
 				},
 
 				$coordinate = new mockOfTicTacToe\coordinate,
-				$this->calling($coordinate)->recipientOfDistanceInMatrixRowIs = function($recipient) use ($row) {
-					$recipient->distanceInMatrixIs($row);
+				$this->calling($coordinate)->recipientOfPlaceInTicTacToeBoardRowsIs = function($recipient) use ($row) {
+					$recipient->placeInTicTacToeBoardIs($row);
 				},
-				$this->calling($coordinate)->recipientOfDistanceInMatrixColumnIs = function($recipient) use ($column) {
-					$recipient->distanceInMatrixIs($column);
+				$this->calling($coordinate)->recipientOfPlaceInTicTacToeBoardColumnsIs = function($recipient) use ($column) {
+					$recipient->placeInTicTacToeBoardIs($column);
 				},
 
 				$recipient = new mockOfTicTacToe\board\recipient

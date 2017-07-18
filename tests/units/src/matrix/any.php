@@ -19,23 +19,23 @@ class any extends units\test
 		$this
 			->given(
 				$maxCoordinate = new mockOfTicTacToe\matrix\coordinate,
-				$this->calling($maxCoordinate)->recipientOfDistanceInMatrixRowIs = function($recipient) {
-					$recipient->distanceInMatrixIs(new matrix\coordinate\distance\any(3));
+				$this->calling($maxCoordinate)->recipientOfPlaceInMatrixRowsIs = function($recipient) {
+					$recipient->placeInMatrixIs(new matrix\coordinate\place\any(3));
 				},
-				$this->calling($maxCoordinate)->recipientOfDistanceInMatrixColumnIs = function($recipient) {
-					$recipient->distanceInMatrixIs(new matrix\coordinate\distance\any(3));
+				$this->calling($maxCoordinate)->recipientOfPlaceInMatrixColumnsIs = function($recipient) {
+					$recipient->placeInMatrixIs(new matrix\coordinate\place\any(3));
 				},
 
 				$coordinate = new mockOfTicTacToe\matrix\coordinate,
 
 				$row = rand(1, 3),
-				$this->calling($coordinate)->recipientOfDistanceInMatrixRowIs = function($recipient) use ($row) {
-					$recipient->distanceInMatrixIs(new matrix\coordinate\distance\any($row));
+				$this->calling($coordinate)->recipientOfPlaceInMatrixRowsIs = function($recipient) use ($row) {
+					$recipient->placeInMatrixIs(new matrix\coordinate\place\any($row));
 				},
 
 				$column = rand(1, 3),
-				$this->calling($coordinate)->recipientOfDistanceInMatrixColumnIs = function($recipient) use ($column) {
-					$recipient->distanceInMatrixIs(new matrix\coordinate\distance\any($column));
+				$this->calling($coordinate)->recipientOfPlaceInMatrixColumnsIs = function($recipient) use ($column) {
+					$recipient->placeInMatrixIs(new matrix\coordinate\place\any($column));
 				},
 
 				$value = new mockOfTicTacToe\matrix\value,
@@ -65,13 +65,13 @@ class any extends units\test
 
 			->given(
 				$row = rand(4, PHP_INT_MAX),
-				$this->calling($coordinate)->recipientOfDistanceInMatrixRowIs = function($recipient) use ($row) {
-					$recipient->distanceInMatrixIs(new matrix\coordinate\distance\any($row));
+				$this->calling($coordinate)->recipientOfPlaceInMatrixRowsIs = function($recipient) use ($row) {
+					$recipient->placeInMatrixIs(new matrix\coordinate\place\any($row));
 				},
 
 				$column = rand(4, PHP_INT_MAX),
-				$this->calling($coordinate)->recipientOfDistanceInMatrixColumnIs = function($recipient) use ($column) {
-					$recipient->distanceInMatrixIs(new matrix\coordinate\distance\any($column));
+				$this->calling($coordinate)->recipientOfPlaceInMatrixColumnsIs = function($recipient) use ($column) {
+					$recipient->placeInMatrixIs(new matrix\coordinate\place\any($column));
 				},
 
 				$value = new mockOfTicTacToe\matrix\value,
@@ -104,11 +104,11 @@ class any extends units\test
 		$this
 			->given(
 				$maxCoordinate = new mockOfTicTacToe\matrix\coordinate,
-				$this->calling($maxCoordinate)->recipientOfDistanceInMatrixRowIs = function($recipient) {
-					$recipient->distanceInMatrixIs(new matrix\coordinate\distance\any(3));
+				$this->calling($maxCoordinate)->recipientOfPlaceInMatrixRowsIs = function($recipient) {
+					$recipient->placeInMatrixIs(new matrix\coordinate\place\any(3));
 				},
-				$this->calling($maxCoordinate)->recipientOfDistanceInMatrixColumnIs = function($recipient) {
-					$recipient->distanceInMatrixIs(new matrix\coordinate\distance\any(3));
+				$this->calling($maxCoordinate)->recipientOfPlaceInMatrixColumnsIs = function($recipient) {
+					$recipient->placeInMatrixIs(new matrix\coordinate\place\any(3));
 				},
 
 				$this->newTestedInstance($maxCoordinate),
@@ -116,13 +116,13 @@ class any extends units\test
 				$coordinate = new mockOfTicTacToe\matrix\coordinate,
 
 				$row = rand(1, 3),
-				$this->calling($coordinate)->recipientOfDistanceInMatrixRowIs = function($recipient) use ($row) {
-					$recipient->distanceInMatrixIs(new matrix\coordinate\distance\any($row));
+				$this->calling($coordinate)->recipientOfPlaceInMatrixRowsIs = function($recipient) use ($row) {
+					$recipient->placeInMatrixIs(new matrix\coordinate\place\any($row));
 				},
 
 				$column = rand(1, 3),
-				$this->calling($coordinate)->recipientOfDistanceInMatrixColumnIs = function($recipient) use ($column) {
-					$recipient->distanceInMatrixIs(new matrix\coordinate\distance\any($column));
+				$this->calling($coordinate)->recipientOfPlaceInMatrixColumnsIs = function($recipient) use ($column) {
+					$recipient->placeInMatrixIs(new matrix\coordinate\place\any($column));
 				},
 
 				$recipient = new mockOfTicTacToe\matrix\value\recipient

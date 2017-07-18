@@ -26,22 +26,22 @@ class lessThanOrEqualTo extends units\test
 						->never
 
 			->given(
-				$this->calling($coordinate)->recipientOfDistanceInMatrixRowIs = function($recipient) {
-					$recipient->distanceInMatrixIs(new matrix\coordinate\distance\any(3));
+				$this->calling($coordinate)->recipientOfPlaceInMatrixRowsIs = function($recipient) {
+					$recipient->placeInMatrixIs(new matrix\coordinate\place\any(3));
 				},
 
-				$this->calling($coordinate)->recipientOfDistanceInMatrixcolumnIs = function($recipient) {
-					$recipient->distanceInMatrixIs(new matrix\coordinate\distance\any(3));
+				$this->calling($coordinate)->recipientOfPlaceInMatrixColumnsIs = function($recipient) {
+					$recipient->placeInMatrixIs(new matrix\coordinate\place\any(3));
 				},
 
 				$row = rand(1, 3),
-				$this->calling($otherCoordinate)->recipientOfDistanceInMatrixRowIs = function($recipient) use ($row) {
-					$recipient->distanceInMatrixIs(new matrix\coordinate\distance\any($row));
+				$this->calling($otherCoordinate)->recipientOfPlaceInMatrixRowsIs = function($recipient) use ($row) {
+					$recipient->placeInMatrixIs(new matrix\coordinate\place\any($row));
 				},
 
 				$column = rand(1, 3),
-				$this->calling($otherCoordinate)->recipientOfDistanceInMatrixcolumnIs = function($recipient) use ($column) {
-					$recipient->distanceInMatrixIs(new matrix\coordinate\distance\any($column));
+				$this->calling($otherCoordinate)->recipientOfPlaceInMatrixColumnsIs = function($recipient) use ($column) {
+					$recipient->placeInMatrixIs(new matrix\coordinate\place\any($column));
 				}
 			)
 			->if(
