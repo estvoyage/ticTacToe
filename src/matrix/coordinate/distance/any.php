@@ -17,7 +17,7 @@ class any
 			$this->ointeger = new ointeger\unsigned\any($value);
 
 			(new ointeger\comparison\unary\lessThan(new ointeger\any(1)))
-				->recipientOfComparisonWithOIntegerIsCondition(
+				->conditionOfComparisonWithOIntegerIs(
 					$this->ointeger,
 					new condition\ifTrueError(new \typeError)
 				)

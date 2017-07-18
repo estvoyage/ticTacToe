@@ -20,7 +20,7 @@ class unary
 	function ointegerIs(ointeger $ointeger) :void
 	{
 		$this->comparison
-			->recipientOfComparisonWithOIntegerIsCondition(
+			->conditionOfComparisonWithOIntegerIs(
 				$ointeger,
 				$this->condition
 			)

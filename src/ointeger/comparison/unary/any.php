@@ -17,7 +17,7 @@ class any
 		$this->comparison = $comparison;
 	}
 
-	function recipientOfComparisonWithOIntegerIsCondition(ointeger $ointeger, condition $condition) :void
+	function conditionOfComparisonWithOIntegerIs(ointeger $ointeger, condition $condition) :void
 	{
 		$ointeger
 			->recipientOfValueOfOIntegerIs(
@@ -29,7 +29,7 @@ class any
 								new ninteger\recipient\functor(
 									function($reference) use ($value, $condition) {
 										$this->comparison
-											->recipientOfComparisonBetweenNIntegerAndNIntegerIs(
+											->conditionOfComparisonBetweenNIntegerAndNIntegerIs(
 												$value,
 												$reference,
 												$condition

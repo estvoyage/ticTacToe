@@ -14,7 +14,7 @@ class any extends units\test
 		;
 	}
 
-	function testRecipientOfComparisonWithOIntegerIsCondition()
+	function testConditionOfComparisonWithOIntegerIsCondition()
 	{
 		$this
 			->given(
@@ -23,13 +23,13 @@ class any extends units\test
 				$condition = new mockOfTicTacToe\condition
 			)
 			->if(
-				$this->testedInstance->recipientOfComparisonWithOIntegerIsCondition($ointeger2, $condition)
+				$this->testedInstance->conditionOfComparisonWithOIntegerIs($ointeger2, $condition)
 			)
 			->then
 				->object($this->testedInstance)
 					->isEqualTo($this->newTestedInstance($ointeger1, $comparison))
 				->mock($comparison)
-					->receive('recipientOfComparisonBetweenNIntegerAndNIntegerIs')
+					->receive('conditionOfComparisonBetweenNIntegerAndNIntegerIs')
 						->never
 
 			->given(
@@ -44,13 +44,13 @@ class any extends units\test
 				}
 			)
 			->if(
-				$this->testedInstance->recipientOfComparisonWithOIntegerIsCondition($ointeger2, $condition)
+				$this->testedInstance->conditionOfComparisonWithOIntegerIs($ointeger2, $condition)
 			)
 			->then
 				->object($this->testedInstance)
 					->isEqualTo($this->newTestedInstance($ointeger1, $comparison))
 				->mock($comparison)
-					->receive('recipientOfComparisonBetweenNIntegerAndNIntegerIs')
+					->receive('conditionOfComparisonBetweenNIntegerAndNIntegerIs')
 						->withArguments($valueOfOinteger2, $valueOfOinteger1, $condition)
 							->once
 		;

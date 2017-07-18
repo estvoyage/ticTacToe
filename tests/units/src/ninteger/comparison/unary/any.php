@@ -30,7 +30,7 @@ class any extends units\test
 				->object($this->testedInstance)
 					->isEqualTo($this->newTestedInstance($ninteger, $comparison))
 				->mock($comparison)
-					->receive('recipientOfComparisonBetweenNIntegerAndNIntegerIs')
+					->receive('conditionOfComparisonBetweenNIntegerAndNIntegerIs')
 						->withArguments($ninteger2, $ninteger, $condition)
 							->once
 		;

@@ -59,7 +59,7 @@ class any extends ointeger\any
 	private static function conditionForOIntegerIs(ointeger $ointeger, condition $condition) :void
 	{
 		(new ointeger\comparison\unary\lessThan(new ointeger\any))
-			->recipientOfComparisonWithOIntegerIsCondition(
+			->conditionOfComparisonWithOIntegerIs(
 				$ointeger,
 				$condition
 			)

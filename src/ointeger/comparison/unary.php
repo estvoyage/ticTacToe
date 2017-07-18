@@ -4,5 +4,5 @@ use estvoyage\ticTacToe\{ condition, ointeger };
 
 interface unary
 {
-	function recipientOfComparisonWithOIntegerIsCondition(ointeger $ointeger, condition $condition) :void;
+	function conditionOfComparisonWithOIntegerIs(ointeger $ointeger, condition $condition) :void;
 }

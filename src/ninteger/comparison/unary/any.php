@@ -20,7 +20,7 @@ class any
 	function conditionOfComparisonWithNIntegerIs(int $ninteger, condition $condition) :void
 	{
 		$this->comparison
-			->recipientOfComparisonBetweenNIntegerAndNIntegerIs(
+			->conditionOfComparisonBetweenNIntegerAndNIntegerIs(
 				$ninteger,
 				$this->ninteger,
 				$condition

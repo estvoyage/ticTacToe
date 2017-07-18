@@ -6,7 +6,7 @@ class lessThan
 	implements
 		comparison\binary
 {
-	function recipientOfComparisonBetweenNIntegerAndNIntegerIs(int $ninteger1, int $ninteger2, condition $condition) :void
+	function conditionOfComparisonBetweenNIntegerAndNIntegerIs(int $ninteger1, int $ninteger2, condition $condition) :void
 	{
 		$condition
 			->nbooleanIs(

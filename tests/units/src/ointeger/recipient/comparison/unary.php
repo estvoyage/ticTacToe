@@ -28,7 +28,7 @@ class unary extends units\test
 				->object($this->testedInstance)
 					->isEqualTo($this->newTestedInstance($comparison, $condition))
 				->mock($comparison)
-					->receive('recipientOfComparisonWithOIntegerIsCondition')
+					->receive('conditionOfComparisonWithOIntegerIs')
 						->withArguments($ointeger, $condition)
 							->once
 		;

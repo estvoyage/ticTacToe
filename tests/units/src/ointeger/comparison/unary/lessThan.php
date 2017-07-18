@@ -14,7 +14,7 @@ class lessThan extends units\test
 		;
 	}
 
-	function testRecipientOfComparisonWithOIntegerIsCondition()
+	function testConditionOfComparisonWithOIntegerIs()
 	{
 		$this
 			->given(
@@ -23,7 +23,7 @@ class lessThan extends units\test
 				$condition = new mockOfTicTacToe\condition
 			)
 			->if(
-				$this->testedInstance->recipientOfComparisonWithOIntegerIsCondition($ointeger2, $condition)
+				$this->testedInstance->conditionOfComparisonWithOIntegerIs($ointeger2, $condition)
 			)
 			->then
 				->object($this->testedInstance)
@@ -41,7 +41,7 @@ class lessThan extends units\test
 				}
 			)
 			->if(
-				$this->testedInstance->recipientOfComparisonWithOIntegerIsCondition($ointeger2, $condition)
+				$this->testedInstance->conditionOfComparisonWithOIntegerIs($ointeger2, $condition)
 			)
 			->then
 				->object($this->testedInstance)

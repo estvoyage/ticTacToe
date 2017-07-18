@@ -17,7 +17,7 @@ class lessThan extends units\test
 	/**
 	 * @dataProvider argumentsProvider
 	 */
-	function testRecipientOfComparisonBetweenNIntegerAndNIntegerIs($ninteger1, $ninteger2, $boolean)
+	function testConditionOfComparisonBetweenNIntegerAndNIntegerIs($ninteger1, $ninteger2, $boolean)
 	{
 		$this
 			->given(
@@ -25,7 +25,7 @@ class lessThan extends units\test
 				$condition = new mockOfTicTacToe\condition
 			)
 			->if(
-				$this->testedInstance->recipientOfComparisonBetweenNIntegerAndNIntegerIs($ninteger1, $ninteger2, $condition)
+				$this->testedInstance->conditionOfComparisonBetweenNIntegerAndNIntegerIs($ninteger1, $ninteger2, $condition)
 			)
 			->then
 				->object($this->testedInstance)
