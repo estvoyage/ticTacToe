@@ -59,14 +59,20 @@ class any
 			new block\functor(
 				function($row, $column) use ($recipient)
 				{
-					if (isset($this->values[$row][$column]))
-					{
-						$recipient
-							->matrixValueIs(
-								$this->values[$row][$column]
-							)
-						;
-					}
+					(
+						new condition\ifTrue\functor(
+							function() use ($row, $column, $recipient)
+							{
+								$recipient
+									->matrixValueIs(
+										$this->values[$row][$column]
+									)
+								;
+							}
+						)
+					)
+						->nbooleanIs(isset($this->values[$row][$column]))
+					;
 				}
 			)
 		);
@@ -97,47 +103,21 @@ class any
 				new condition\ifTrue(
 					new block\functor(
 						function() use ($coordinate, $block) {
-							$coordinate
-								->recipientOfPlaceInMatrixRowsIs(
-									new matrix\coordinate\place\recipient\functor(
-										function($row) use ($coordinate, $block)
-										{
-											$coordinate
-												->recipientOfPlaceInMatrixColumnsIs(
-													new matrix\coordinate\place\recipient\functor(
-														function($column) use ($row, $block)
-														{
-															$row
-																->recipientOfNIntegerGreaterThanZeroIs(
-																	new ninteger\recipient\functor(
-																		function($row) use ($column, $block)
-																		{
-																			$column
-																				->recipientOfNIntegerGreaterThanZeroIs(
-																					new ninteger\recipient\functor(
-																						function($column) use ($row, $block)
-																						{
-																							$block
-																								->blockArgumentsAre(
-																									$row,
-																									$column
-																								)
-																							;
-																						}
-																					)
-																				)
-																			;
-																		}
-																	)
-																)
-															;
-														}
+							(new matrix\coordinate\forwarder\nintegers)
+								->matrixCoordinateIs($coordinate)
+									->blockIs(
+										new block\functor(
+											function($row, $column) use ($block)
+											{
+												$block
+													->blockArgumentsAre(
+														$row,
+														$column
 													)
-												)
-											;
-										}
+												;
+											}
+										)
 									)
-								)
 							;
 						}
 					)
