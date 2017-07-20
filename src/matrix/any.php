@@ -1,6 +1,6 @@
 <?php namespace estvoyage\ticTacToe\matrix;
 
-use estvoyage\ticTacToe\{ matrix, ninteger, block, condition };
+use estvoyage\ticTacToe\{ matrix, ninteger, block, condition, iterator };
 
 class any
 	implements
@@ -15,41 +15,50 @@ class any
 	{
 		$this->maxCoordinate = $maxCoordinate;
 
-		foreach ($values as $value)
-		{
-			$value
-				->recipientOfMatrixCoordinateIs(
-					new matrix\coordinate\recipient\functor(
-						function($coordinate) use ($value)
+		(new iterator\fifo)
+			->valuesForIteratorPayloadAre(
+				new iterator\payload\block(
+					new block\functor(
+						function($iterator, $value)
 						{
-							$this->blockForCoordinateIs(
-								$coordinate,
-								new block\functor(
-									function($row, $column) use ($value)
-									{
-										$value
-											->recipientOfMatrixValueIs(
-												new matrix\value\recipient\functor(
-													function($value) use ($row, $column)
+							$value
+								->recipientOfMatrixCoordinateIs(
+									new matrix\coordinate\recipient\functor(
+										function($coordinate) use ($value)
+										{
+											$this->blockForCoordinateIs(
+												$coordinate,
+												new block\functor(
+													function($row, $column) use ($value)
 													{
-														self::matrixWithValueAtRowAndColumnIs(
-															$value,
-															$row,
-															$column,
-															$this
-														);
+														$value
+															->recipientOfMatrixValueIs(
+																new matrix\value\recipient\functor(
+																	function($value) use ($row, $column)
+																	{
+																		self::matrixWithValueAtRowAndColumnIs(
+																			$value,
+																			$row,
+																			$column,
+																			$this
+																		);
+																	}
+																)
+															)
+														;
 													}
 												)
-											)
-										;
-									}
+											);
+										}
+									)
 								)
-							);
+							;
 						}
 					)
-				)
-			;
-		}
+				),
+				$values
+			)
+		;
 	}
 
 	function recipientOfValueInMatrixAtCoordinateIs(matrix\coordinate $coordinate, matrix\value\recipient $recipient) :void
