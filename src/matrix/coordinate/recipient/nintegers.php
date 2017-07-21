@@ -1,29 +1,28 @@
-<?php namespace estvoyage\ticTacToe\matrix\coordinate\forwarder;
+<?php namespace estvoyage\ticTacToe\matrix\coordinate\recipient;
 
 use estvoyage\{ ticTacToe,  ticTacToe\block, ticTacToe\matrix\coordinate, ticTacToe\condition };
 
 class nintegers
 	implements
-		coordinate\forwarder
+		coordinate\recipient
 {
 	private
+		$block,
 		$row,
 		$column
 	;
 
-	function __construct(int $row = null, int $column = null)
+	function __construct(block $block)
 	{
-		$this->row = $row;
-		$this->column = $column;
+		$this->block = $block;
 	}
 
-	function matrixCoordinateIs(coordinate $coordinate) :coordinate\forwarder
+	function matrixCoordinateIs(coordinate $coordinate) :void
 	{
 		$self = clone $this;
 
-		(new coordinate\forwarder\places)
-			->matrixCoordinateIs($coordinate)
-			->blockIs(
+		(
+			new places(
 				new block\functor(
 					function($row, $column) use ($self)
 					{
@@ -48,27 +47,22 @@ class nintegers
 								)
 							)
 						;
+
+						(
+							new condition\ifTrue\functor(
+								function() use ($self)
+								{
+									$self->block->blockArgumentsAre($self->row, $self->column);
+								}
+							)
+						)
+							->nbooleanIs($self->row && $self->column)
+						;
 					}
 				)
 			)
-		;
-
-		return $self;
-	}
-
-	function blockIs(block $block) :coordinate\forwarder
-	{
-		(
-			new condition\ifTrue\functor(
-				function() use ($block)
-				{
-					$block->blockArgumentsAre($this->row, $this->column);
-				}
-			)
 		)
-			->nbooleanIs($this->row && $this->column)
+			->matrixCoordinateIs($coordinate)
 		;
-
-		return $this;
 	}
 }

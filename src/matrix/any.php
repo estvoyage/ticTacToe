@@ -100,27 +100,18 @@ class any
 		(new matrix\coordinate\comparison\unary\lessThanOrEqualTo($this->maxCoordinate))
 			->conditionOfComparisonWithMatrixCoordinateIs(
 				$coordinate,
-				new condition\ifTrue(
-					new block\functor(
-						function() use ($coordinate, $block) {
-							(new matrix\coordinate\forwarder\nintegers)
-								->matrixCoordinateIs($coordinate)
-									->blockIs(
-										new block\functor(
-											function($row, $column) use ($block)
-											{
-												$block
-													->blockArgumentsAre(
-														$row,
-														$column
-													)
-												;
-											}
-										)
-									)
-							;
-						}
-					)
+				new condition\ifTrue\functor(
+					function() use ($coordinate, $block) {
+						(
+							new matrix\coordinate\recipient\nintegers(
+								new block\forwarder(
+									$block
+								)
+							)
+						)
+							->matrixCoordinateIs($coordinate)
+						;
+					}
 				)
 			)
 		;

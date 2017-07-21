@@ -1,23 +1,25 @@
-<?php namespace estvoyage\ticTacToe\matrix\coordinate\forwarder;
+<?php namespace estvoyage\ticTacToe\matrix\coordinate\recipient;
 
 use estvoyage\ticTacToe\{ matrix\coordinate, block };
 
 class places
 	implements
-		coordinate\forwarder
+		coordinate\recipient
 {
 	private
-		$row,
-		$column
+		$block,
+		$column,
+		$row
 	;
 
-	function __construct(coordinate\place $row = null, coordinate\place $column = null)
+	function __construct(block $block, coordinate\place $row = null, coordinate\place $column = null)
 	{
+		$this->block = $block;
 		$this->row = $row ?: new coordinate\place\blackhole;
 		$this->column = $column ?: new coordinate\place\blackhole;
 	}
 
-	function matrixCoordinateIs(coordinate $coordinate) :coordinate\forwarder
+	function matrixCoordinateIs(coordinate $coordinate) :void
 	{
 		$self = clone $this;
 
@@ -43,13 +45,6 @@ class places
 			)
 		;
 
-		return $self;
-	}
-
-	function blockIs(block $block) :coordinate\forwarder
-	{
-		$block->blockArgumentsAre($this->row, $this->column);
-
-		return $this;
+		$self->block->blockArgumentsAre($self->row, $self->column);
 	}
 }

@@ -1,4 +1,4 @@
-<?php namespace estvoyage\ticTacToe\tests\units\matrix\coordinate\forwarder;
+<?php namespace estvoyage\ticTacToe\tests\units\matrix\coordinate\recipient;
 
 require __DIR__ . '/../../../../runner.php';
 
@@ -9,19 +9,19 @@ class places extends units\test
 {
 	function testClass()
 	{
-		$this->testedClass->implements('estvoyage\ticTacToe\matrix\coordinate\forwarder');
+		$this->testedClass->implements('estvoyage\ticTacToe\matrix\coordinate\recipient');
 	}
 
 	function test__construct()
 	{
-		$this->object($this->newTestedInstance)->isEqualTo($this->newTestedInstance(new matrix\coordinate\place\blackhole, new matrix\coordinate\place\blackhole));
+		$this->object($this->newTestedInstance($block = new mockOfBlock))->isEqualTo($this->newTestedInstance($block, new matrix\coordinate\place\blackhole, new matrix\coordinate\place\blackhole));
 	}
 
 	function testMatrixCoordinateIs()
 	{
 		$this
 			->given(
-				$this->newTestedInstance($row = new mockOfMatrix\coordinate\place, $column = new mockOfMatrix\coordinate\place),
+				$this->newTestedInstance($block = new mockOfBlock, $row = new mockOfMatrix\coordinate\place, $column = new mockOfMatrix\coordinate\place),
 				$coordinate = new mockOfMatrix\coordinate
 			)
 			->if(
@@ -29,7 +29,11 @@ class places extends units\test
 			)
 			->then
 				->object($this->testedInstance)
-					->isEqualTo($this->newTestedInstance($row, $column))
+					->isEqualTo($this->newTestedInstance($block, $row, $column))
+				->mock($block)
+					->receive('blockArgumentsAre')
+						->withArguments($row, $column)
+							->once
 
 			->given(
 				$rowInMatrix = new mockOfMatrix\coordinate\place,
@@ -47,30 +51,10 @@ class places extends units\test
 			)
 			->then
 				->object($this->testedInstance)
-					->isEqualTo($this->newTestedInstance($row, $column))
-				->object($withRowAndColumnInMatrix)
-					->isEqualTo($this->newTestedInstance($rowInMatrix, $columnInMatrix))
-		;
-	}
-
-	function testBlockIs()
-	{
-		$this
-			->given(
-				$this->newTestedInstance($row = new mockOfMatrix\coordinate\place, $column = new mockOfMatrix\coordinate\place),
-				$block = new mockOfBlock
-			)
-			->if(
-				$forwarder = $this->testedInstance->blockIs($block)
-			)
-			->then
-				->object($this->testedInstance)
-					->isEqualTo($this->newTestedInstance($row, $column))
-				->object($forwarder)
-					->isEqualTo($this->newTestedInstance($row, $column))
+					->isEqualTo($this->newTestedInstance($block, $row, $column))
 				->mock($block)
 					->receive('blockArgumentsAre')
-						->withArguments($row, $column)
+						->withArguments($rowInMatrix, $columnInMatrix)
 							->once
 		;
 	}
