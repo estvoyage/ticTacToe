@@ -21,17 +21,19 @@ class x3
 				new matrix\coordinate\place\any(3),
 				new matrix\coordinate\place\any(3)
 			),
-			new matrix\value\any($l1c1, new matrix\coordinate\any(new matrix\coordinate\place\any(1), new matrix\coordinate\place\any(1))),
-			new matrix\value\any($l1c2, new matrix\coordinate\any(new matrix\coordinate\place\any(1), new matrix\coordinate\place\any(2))),
-			new matrix\value\any($l1c3, new matrix\coordinate\any(new matrix\coordinate\place\any(1), new matrix\coordinate\place\any(3))),
+			new matrix\value\container\fifo(
+				new matrix\value\any($l1c1, new matrix\coordinate\any(new matrix\coordinate\place\any(1), new matrix\coordinate\place\any(1))),
+				new matrix\value\any($l1c2, new matrix\coordinate\any(new matrix\coordinate\place\any(1), new matrix\coordinate\place\any(2))),
+				new matrix\value\any($l1c3, new matrix\coordinate\any(new matrix\coordinate\place\any(1), new matrix\coordinate\place\any(3))),
 
-			new matrix\value\any($l2c1, new matrix\coordinate\any(new matrix\coordinate\place\any(2), new matrix\coordinate\place\any(1))),
-			new matrix\value\any($l2c2, new matrix\coordinate\any(new matrix\coordinate\place\any(2), new matrix\coordinate\place\any(2))),
-			new matrix\value\any($l2c3, new matrix\coordinate\any(new matrix\coordinate\place\any(2), new matrix\coordinate\place\any(3))),
+				new matrix\value\any($l2c1, new matrix\coordinate\any(new matrix\coordinate\place\any(2), new matrix\coordinate\place\any(1))),
+				new matrix\value\any($l2c2, new matrix\coordinate\any(new matrix\coordinate\place\any(2), new matrix\coordinate\place\any(2))),
+				new matrix\value\any($l2c3, new matrix\coordinate\any(new matrix\coordinate\place\any(2), new matrix\coordinate\place\any(3))),
 
-			new matrix\value\any($l3c1, new matrix\coordinate\any(new matrix\coordinate\place\any(3), new matrix\coordinate\place\any(1))),
-			new matrix\value\any($l3c2, new matrix\coordinate\any(new matrix\coordinate\place\any(3), new matrix\coordinate\place\any(2))),
-			new matrix\value\any($l3c3, new matrix\coordinate\any(new matrix\coordinate\place\any(3), new matrix\coordinate\place\any(3)))
+				new matrix\value\any($l3c1, new matrix\coordinate\any(new matrix\coordinate\place\any(3), new matrix\coordinate\place\any(1))),
+				new matrix\value\any($l3c2, new matrix\coordinate\any(new matrix\coordinate\place\any(3), new matrix\coordinate\place\any(2))),
+				new matrix\value\any($l3c3, new matrix\coordinate\any(new matrix\coordinate\place\any(3), new matrix\coordinate\place\any(3)))
+			)
 		);
 	}
 

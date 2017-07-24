@@ -11,12 +11,13 @@ class any
 		$values
 	;
 
-	function __construct(matrix\coordinate $maxCoordinate, matrix\value... $values)
+	function __construct(matrix\coordinate $maxCoordinate, matrix\value\container $values = null)
 	{
 		$this->maxCoordinate = $maxCoordinate;
 
-		(new iterator\fifo)
-			->valuesForIteratorPayloadAre(
+		($values ?: new matrix\value\container\blackhole)
+			->payloadForIteratorIs(
+				new iterator\fifo,
 				new iterator\payload\block(
 					new block\functor(
 						function($iterator, $value)

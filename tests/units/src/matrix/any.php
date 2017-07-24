@@ -46,7 +46,7 @@ class any extends units\test
 					$recipient->matrixValueIs('foo');
 				},
 
-				$this->newTestedInstance($maxCoordinate, $value),
+				$this->newTestedInstance($maxCoordinate, new matrix\value\container\fifo($value)),
 
 				$otherValue = 'bar',
 
@@ -57,10 +57,10 @@ class any extends units\test
 			)
 			->then
 				->object($this->testedInstance)
-					->isEqualTo($this->newTestedInstance($maxCoordinate, $value))
+					->isEqualTo($this->newTestedInstance($maxCoordinate, new matrix\value\container\fifo($value)))
 				->mock($recipient)
 					->receive('matrixIs')
-						->withArguments($this->newTestedInstance($maxCoordinate, new matrix\value\any($otherValue, $coordinate)))
+						->withArguments($this->newTestedInstance($maxCoordinate, new matrix\value\container\fifo(new matrix\value\any($otherValue, $coordinate))))
 							->once
 
 			->given(
@@ -82,7 +82,7 @@ class any extends units\test
 					$recipient->matrixValueIs('foo');
 				},
 
-				$this->newTestedInstance($maxCoordinate, $value),
+				$this->newTestedInstance($maxCoordinate, new matrix\value\container\fifo($value)),
 
 				$recipient = new mockOfTicTacToe\matrix\recipient
 			)
@@ -91,10 +91,10 @@ class any extends units\test
 			)
 			->then
 				->object($this->testedInstance)
-					->isEqualTo($this->newTestedInstance($maxCoordinate, $value))
+					->isEqualTo($this->newTestedInstance($maxCoordinate, new matrix\value\container\fifo($value)))
 				->mock($recipient)
 					->receive('matrixIs')
-						->withArguments($this->newTestedInstance($maxCoordinate, new matrix\value\any($otherValue, $coordinate)))
+						->withArguments($this->newTestedInstance($maxCoordinate, new matrix\value\container\fifo(new matrix\value\any($otherValue, $coordinate))))
 							->never
 		;
 	}
@@ -146,14 +146,14 @@ class any extends units\test
 					$recipient->matrixValueIs('foo');
 				},
 
-				$this->newTestedInstance($maxCoordinate, $value)
+				$this->newTestedInstance($maxCoordinate, new matrix\value\container\fifo($value))
 			)
 			->if(
 				$this->testedInstance->recipientOfValueInMatrixAtCoordinateIs($coordinate, $recipient)
 			)
 			->then
 				->object($this->testedInstance)
-					->isEqualTo($this->newTestedInstance($maxCoordinate, $value))
+					->isEqualTo($this->newTestedInstance($maxCoordinate, new matrix\value\container\fifo($value)))
 				->mock($recipient)
 					->receive('matrixValueIs')
 						->withArguments('foo')
