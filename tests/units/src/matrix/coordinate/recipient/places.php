@@ -47,7 +47,7 @@ class places extends units\test
 				}
 			)
 			->if(
-				$withRowAndColumnInMatrix = $this->testedInstance->matrixCoordinateIs($coordinate)
+				$this->testedInstance->matrixCoordinateIs($coordinate)
 			)
 			->then
 				->object($this->testedInstance)

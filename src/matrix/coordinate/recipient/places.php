@@ -2,19 +2,19 @@
 
 use estvoyage\ticTacToe\{ matrix\coordinate, block };
 
-class places
+class places extends block\forwarder
 	implements
 		coordinate\recipient
 {
 	private
-		$block,
 		$column,
 		$row
 	;
 
 	function __construct(block $block, coordinate\place $row = null, coordinate\place $column = null)
 	{
-		$this->block = $block;
+		parent::__construct($block);
+
 		$this->row = $row ?: new coordinate\place\blackhole;
 		$this->column = $column ?: new coordinate\place\blackhole;
 	}
@@ -45,6 +45,6 @@ class places
 			)
 		;
 
-		$self->block->blockArgumentsAre($self->row, $self->column);
+		$self->blockArgumentsAre($self->row, $self->column);
 	}
 }

@@ -2,7 +2,7 @@
 
 require __DIR__ . '/../../runner.php';
 
-use estvoyage\ticTacToe\tests\units;
+use estvoyage\ticTacToe\{ tests\units, coordinate };
 use mock\estvoyage\ticTacToe as mockOfTicTacToe;
 
 class x3 extends units\test
@@ -281,6 +281,47 @@ class x3 extends units\test
 				->mock($recipient)
 					->receive('ticTacToeBoardIs')
 						->never
+		;
+	}
+
+	function testRecipientOfMaximumCoordinateOfTicTacToeBoardIs()
+	{
+		$this
+			->given(
+				$this->newTestedInstance(
+					$l1c1 = new mockOfTicTacToe\symbol,
+					$l1c2 = new mockOfTicTacToe\symbol,
+					$l1c3 = new mockOfTicTacToe\symbol,
+					$l2c1 = new mockOfTicTacToe\symbol,
+					$l2c2 = new mockOfTicTacToe\symbol,
+					$l2c3 = new mockOfTicTacToe\symbol,
+					$l3c1 = new mockOfTicTacToe\symbol,
+					$l3c2 = new mockOfTicTacToe\symbol,
+					$l3c3 = new mockOfTicTacToe\symbol
+				),
+				$recipient = new mockOfTicTacToe\coordinate\recipient
+			)
+			->if(
+				$this->testedInstance->recipientOfMaximumCoordinateOfTicTacToeBoardIs($recipient)
+			)
+			->then
+				->object($this->testedInstance)
+					->isEqualTo($this->newTestedInstance(
+							$l1c1,
+							$l1c2,
+							$l1c3,
+							$l2c1,
+							$l2c2,
+							$l2c3,
+							$l3c1,
+							$l3c2,
+							$l3c3
+						)
+					)
+				->mock($recipient)
+					->receive('coordinateInTicTacToeBoardIs')
+						->withArguments(new coordinate\any(new coordinate\place\any(3), new coordinate\place\any(3)))
+							->once
 		;
 	}
 

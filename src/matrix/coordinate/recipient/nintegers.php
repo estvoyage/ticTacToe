@@ -2,20 +2,14 @@
 
 use estvoyage\{ ticTacToe,  ticTacToe\block, ticTacToe\matrix\coordinate, ticTacToe\condition };
 
-class nintegers
+class nintegers extends block\forwarder
 	implements
 		coordinate\recipient
 {
 	private
-		$block,
 		$row,
 		$column
 	;
-
-	function __construct(block $block)
-	{
-		$this->block = $block;
-	}
 
 	function matrixCoordinateIs(coordinate $coordinate) :void
 	{
@@ -52,7 +46,7 @@ class nintegers
 							new condition\ifTrue\functor(
 								function() use ($self)
 								{
-									$self->block->blockArgumentsAre($self->row, $self->column);
+									$self->blockArgumentsAre($self->row, $self->column);
 								}
 							)
 						)

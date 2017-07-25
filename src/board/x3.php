@@ -128,6 +128,11 @@ class x3
 		;
 	}
 
+	function recipientOfMaximumCoordinateOfTicTacToeBoardIs(coordinate\recipient $recipient) :void
+	{
+		$recipient->coordinateInTicTacToeBoardIs(new coordinate\any(new coordinate\place\any(3), new coordinate\place\any(3)));
+	}
+
 	private function recipientForBoardWithSymbolAtCoordinateIs(symbol $symbol, matrix\coordinate $coordinate, board\recipient $recipient) :void
 	{
 		$this->symbols
