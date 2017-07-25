@@ -6,8 +6,8 @@ class block extends ticTacToe\block\proxy
 	implements
 		coordinate\recipient
 {
-	function lineAndColumnOfTicTacToeSymbolIs(int $line, int $column) :void
+	function coordinateInTicTacToeBoardIs(coordinate $coordinate) :void
 	{
-		parent::blockArgumentsAre($line, $column);
+		parent::blockArgumentsAre($coordinate);
 	}
 }

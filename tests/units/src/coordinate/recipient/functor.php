@@ -3,6 +3,7 @@
 require __DIR__ . '/../../../runner.php';
 
 use estvoyage\ticTacToe\tests\units;
+use mock\estvoyage\ticTacToe as mockOfTicTacToe;
 
 class functor extends units\test
 {
@@ -13,22 +14,21 @@ class functor extends units\test
 		;
 	}
 
-	function testLineAndColumnOfTicTacToeSymbolIs()
+	function testCoordinateInTicTacToeBoardIs()
 	{
 		$this
 			->given(
 				$this->newTestedInstance($callable = function() use (& $arguments) { $arguments = func_get_args(); }),
-				$line = rand(PHP_INT_MIN, PHP_INT_MAX),
-				$column = rand(PHP_INT_MIN, PHP_INT_MAX)
+				$coordinate = new mockOfTicTacToe\coordinate
 			)
 			->if(
-				$this->testedInstance->lineAndColumnOfTicTacToeSymbolIs($line, $column)
+				$this->testedInstance->coordinateInTicTacToeBoardIs($coordinate)
 			)
 			->then
 				->object($this->testedInstance)
 					->isEqualTo($this->newTestedInstance($callable))
 				->array($arguments)
-					->isEqualTo([ $line, $column ])
+					->isEqualTo([ $coordinate ])
 		;
 	}
 }
