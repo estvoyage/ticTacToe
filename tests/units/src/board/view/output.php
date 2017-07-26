@@ -13,6 +13,8 @@ class output extends units\test
 			->given(
 				$this->newTestedInstance($output = new mockOfTicTacToe\output),
 
+				$lines = [],
+
 				$this->calling($output)->newLineForOutputIs = function($line) use (& $lines) {
 					$lines[] = $line;
 				},
@@ -25,8 +27,8 @@ class output extends units\test
 			->then
 				->object($this->testedInstance)
 					->isEqualTo($this->newTestedInstance($output))
-				->variable($lines)
-					->isNull
+				->array($lines)
+					->isEmpty
 
 			->given(
 				$maxRow = new mockOfTicTacToe\coordinate\place,
@@ -36,9 +38,9 @@ class output extends units\test
 
 				$maxColumn = new mockOfTicTacToe\coordinate\place,
 				$this->calling($maxColumn)->recipientOfNIntegerGreaterThanZeroIs = function($recipient) {
+
 					$recipient->nintegerIs(3);
 				},
-
 				$maxCoordinate = new mockOfTicTacToe\coordinate,
 				$this->calling($maxCoordinate)->recipientOfPlaceInTicTacToeBoardRowsIs = function($recipient) use ($maxRow) {
 					$recipient->placeInTicTacToeBoardIs($maxRow);
@@ -60,11 +62,96 @@ class output extends units\test
 				->array($lines)
 					->isEqualTo(
 						[
-							new ostring\any(' | | '),
+							new ostring\any('1|2|3'),
 							new ostring\any('-+-+-'),
-							new ostring\any(' | | '),
+							new ostring\any('4|5|6'),
 							new ostring\any('-+-+-'),
-							new ostring\any(' | | '),
+							new ostring\any('7|8|9'),
+						]
+					)
+
+			->given(
+				$lines = [],
+
+				$symbol = new mockOfTicTacToe\symbol,
+
+				$this->calling($board)->recipientOfTicTacToeSymbolAtCoordinateIs = function($coordinate, $recipient) use ($symbol) {
+					$recipient->ticTacToeSymbolIs($symbol);
+				}
+			)
+			->if(
+				$this->testedInstance->ticTacToeBoardIs($board)
+			)
+			->then
+				->object($this->testedInstance)
+					->isEqualTo($this->newTestedInstance($output))
+				->array($lines)
+					->isEqualTo(
+						[
+							new ostring\any('1|2|3'),
+							new ostring\any('-+-+-'),
+							new ostring\any('4|5|6'),
+							new ostring\any('-+-+-'),
+							new ostring\any('7|8|9'),
+						]
+					)
+
+
+			->given(
+				$lines = [],
+
+				$symbol = new mockOfTicTacToe\symbol,
+				$this->calling($symbol)->recipientOfTicTacToeSymbolNameIs = function($recipient) {
+					$recipient->ticTacToeSymbolIsX();
+				},
+
+				$this->calling($board)->recipientOfTicTacToeSymbolAtCoordinateIs = function($coordinate, $recipient) use ($symbol) {
+					$recipient->ticTacToeSymbolIs($symbol);
+				}
+			)
+			->if(
+				$this->testedInstance->ticTacToeBoardIs($board)
+			)
+			->then
+				->object($this->testedInstance)
+					->isEqualTo($this->newTestedInstance($output))
+				->array($lines)
+					->isEqualTo(
+						[
+							new ostring\any('X|X|X'),
+							new ostring\any('-+-+-'),
+							new ostring\any('X|X|X'),
+							new ostring\any('-+-+-'),
+							new ostring\any('X|X|X'),
+						]
+					)
+
+			->given(
+				$lines = [],
+
+				$symbol = new mockOfTicTacToe\symbol,
+				$this->calling($symbol)->recipientOfTicTacToeSymbolNameIs = function($recipient) {
+					$recipient->ticTacToeSymbolIsO();
+				},
+
+				$this->calling($board)->recipientOfTicTacToeSymbolAtCoordinateIs = function($coordinate, $recipient) use ($symbol) {
+					$recipient->ticTacToeSymbolIs($symbol);
+				}
+			)
+			->if(
+				$this->testedInstance->ticTacToeBoardIs($board)
+			)
+			->then
+				->object($this->testedInstance)
+					->isEqualTo($this->newTestedInstance($output))
+				->array($lines)
+					->isEqualTo(
+						[
+							new ostring\any('O|O|O'),
+							new ostring\any('-+-+-'),
+							new ostring\any('O|O|O'),
+							new ostring\any('-+-+-'),
+							new ostring\any('O|O|O'),
 						]
 					)
 		;
