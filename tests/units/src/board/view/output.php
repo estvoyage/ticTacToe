@@ -38,9 +38,9 @@ class output extends units\test
 
 				$maxColumn = new mockOfTicTacToe\coordinate\place,
 				$this->calling($maxColumn)->recipientOfNIntegerGreaterThanZeroIs = function($recipient) {
-
 					$recipient->nintegerIs(3);
 				},
+
 				$maxCoordinate = new mockOfTicTacToe\coordinate,
 				$this->calling($maxCoordinate)->recipientOfPlaceInTicTacToeBoardRowsIs = function($recipient) use ($maxRow) {
 					$recipient->placeInTicTacToeBoardIs($maxRow);
