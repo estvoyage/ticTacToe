@@ -17,69 +17,106 @@ class output
 	{
 		$board
 			->recipientOfMaximumCoordinateOfTicTacToeBoardIs(
-				new coordinate\recipient\nintegers(
-					new block\functor(
-						function($row, $column) use ($board)
-						{
-							(new ninteger\generator\between(1, $row))
-								->recipientOfNIntegerIs(
-									new ninteger\recipient\functor(
-										function($currentRow) use ($board, $row, $column)
-										{
-											$rowWithSymbols = [];
+				new coordinate\recipient\functor(
+					function($maximumCoordinate) use ($board)
+					{
+						$index = 1;
 
-											(new ninteger\generator\between(1, $column))
-												->recipientOfNIntegerIs(
-													new ninteger\recipient\functor(
-														function($currentColumn) use ($board, $column, $currentRow, & $rowWithSymbols)
-														{
-															$rowWithSymbols[$currentColumn] = (($currentRow - 1) * $column) + $currentColumn;
+						(
+							new coordinate\generator\any(
+								new coordinate\factory\places\any,
+								new coordinate\place\generator\fromOrigin(
+									new coordinate\place\factory\ninteger\any
+								),
+								new coordinate\place\generator\same
+							)
+						)
+							->recipientOfTicTacToeCoordinateFromCoordinateIs(
+								$maximumCoordinate,
+								new coordinate\recipient\functor(
+									function($maximumCoordinateInRow) use (& $index, $maximumCoordinate, $board)
+									{
+										$row = [];
 
-															$board
-																->recipientOfTicTacToeSymbolAtCoordinateIs(
-																	new coordinate\any(new coordinate\place\any($currentRow), new coordinate\place\any($currentColumn)),
-																	new symbol\recipient\functor(
-																		function($symbol) use ($currentColumn, & $rowWithSymbols)
-																		{
-																			$symbol
-																				->recipientOfTicTacToeSymbolNameIs(
-																					new symbol\name\recipient\functor(
-																						function() use ($currentColumn, & $rowWithSymbols) {
-																							$rowWithSymbols[$currentColumn] = 'X';
-																						},
-																						function() use ($currentColumn, & $rowWithSymbols) {
-																							$rowWithSymbols[$currentColumn] = 'O';
-																						}
-																					)
-																				)
-																			;
-																		}
-																	)
-																)
-															;
-														}
-													)
+										(
+											new coordinate\generator\any(
+												new coordinate\factory\places\any,
+												new coordinate\place\generator\same,
+												new coordinate\place\generator\fromOrigin(
+													new coordinate\place\factory\ninteger\any
 												)
-											;
-
-											$this->output->newLineForOutputIs(new ostring\any(join('|', $rowWithSymbols)));
-
-											(
-												new condition\ifTrue\functor(
-													function() use ($column)
+											)
+										)
+											->recipientOfTicTacToeCoordinateFromCoordinateIs(
+												$maximumCoordinateInRow,
+												new coordinate\recipient\functor(
+													function($symbolCoordinate) use (& $index, & $row, $board)
 													{
-														$this->output->newLineForOutputIs(new ostring\any(join('+', array_fill(1, $column, '-'))));
+														$output = $index++;
+
+														$board
+															->recipientOfTicTacToeSymbolAtCoordinateIs(
+																$symbolCoordinate,
+																new symbol\recipient\functor(
+																	function($symbol) use (& $output)
+																	{
+																		$symbol
+																			->recipientOfTicTacToeSymbolNameIs(
+																				new symbol\name\recipient\functor(
+																					function() use (& $output) {
+																						$output = 'X';
+																					},
+																					function() use (& $output) {
+																						$output = 'O';
+																					}
+																				)
+																			)
+																		;
+																	}
+																)
+															)
+														;
+
+														$row[] = $output;
+
 													}
 												)
 											)
-												->nbooleanIs($currentRow < $row)
-											;
-										}
-									)
+										;
+
+										$this->output->newLineForOutputIs(new ostring\any(join('|', $row)));
+
+										(new coordinate\comparison\unary\equal\not($maximumCoordinate))
+											->conditionForComparisonWithTicTacToeCoordinateIs(
+												$maximumCoordinateInRow,
+												new condition\ifTrue\functor(
+													function() use ($maximumCoordinateInRow)
+													{
+														(
+															new coordinate\converter\ostring\row(
+																new ostring\recipient\functor(
+																	function($ostring)
+																	{
+																		$this->output->newLineForOutputIs($ostring);
+																	}
+																),
+																new ostring\any('-'),
+																new ostring\any('+')
+															)
+														)
+															->coordinateInTicTacToeBoardIs(
+																$maximumCoordinateInRow
+															)
+														;
+													}
+												)
+											)
+										;
+									}
 								)
-							;
-						}
-					)
+							)
+						;
+					}
 				)
 			)
 		;
