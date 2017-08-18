@@ -1,10 +1,10 @@
 <?php namespace estvoyage\ticTacToe\matrix\coordinate\place;
 
-use estvoyage\ticTacToe\{ matrix, ointeger, ninteger, condition };
+use estvoyage\ticTacToe\{ matrix\coordinate, ointeger, ninteger, condition, block, exception };
 
 class any
 	implements
-		matrix\coordinate\place
+		coordinate\place
 {
 	private
 		$ointeger
@@ -12,21 +12,25 @@ class any
 
 	function __construct($value)
 	{
-		try
-		{
-			$this->ointeger = new ointeger\unsigned\any($value);
-
-			(new ointeger\comparison\unary\lessThan(new ointeger\any(1)))
-				->conditionOfComparisonWithOIntegerIs(
-					$this->ointeger,
-					new condition\ifTrueError(new \typeError)
+		(
+			new exception\catcher\error(
+				new \typeError('Value should be an integer greater than 0')
+			)
+		)
+			->blockIs(
+				new block\functor(
+					function() use ($value)
+					{
+						(new coordinate\place\comparison\unary\lessThan\ointeger($this->ointeger = new ointeger\unsigned\any($value)))
+							->conditionForComparisonWithPlaceInMatrixIs(
+								new coordinate\place\origin,
+								new condition\ifTrueError(new \typeError)
+							)
+						;
+					}
 				)
-			;
-		}
-		catch (\typeError $error)
-		{
-			throw new \typeError('Value should be an integer greater than 0');
-		}
+			)
+		;
 	}
 
 	function recipientOfNIntegerGreaterThanZeroIs(ninteger\recipient $recipient) :void
