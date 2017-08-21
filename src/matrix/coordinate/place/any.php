@@ -21,7 +21,7 @@ class any
 				new block\functor(
 					function() use ($value)
 					{
-						(new coordinate\place\comparison\unary\lessThan\ointeger($this->ointeger = new ointeger\unsigned\any($value)))
+						(new coordinate\place\comparison\unary\ointeger\lessThan($this->ointeger = new ointeger\unsigned\any($value)))
 							->conditionForComparisonWithPlaceInMatrixIs(
 								new coordinate\place\origin,
 								new condition\ifTrueError(new \typeError)

@@ -1,8 +1,8 @@
-<?php namespace estvoyage\ticTacToe\matrix\coordinate\place\comparison\unary\lessThanOrEqualTo;
+<?php namespace estvoyage\ticTacToe\matrix\coordinate\place\comparison\unary\ointeger;
 
 use estvoyage\{ ticTacToe, ticTacToe\matrix\coordinate\place, ticTacToe\condition, ticTacToe\ninteger };
 
-class ointeger
+class greaterThanOrEqualTo
 {
 	private
 		$ointeger
@@ -27,7 +27,7 @@ class ointeger
 									{
 										$condition
 											->nbooleanIs(
-												$valueOfPlace >= $valueOfOInteger
+												$valueOfPlace <= $valueOfOInteger
 											)
 										;
 									}
