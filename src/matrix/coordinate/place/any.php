@@ -13,7 +13,7 @@ class any
 	function __construct($value)
 	{
 		(
-			new exception\catcher\error(
+			new exception\catcher\error\type(
 				new \typeError('Value should be an integer greater than 0')
 			)
 		)

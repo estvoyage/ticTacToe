@@ -1,6 +1,6 @@
 <?php namespace estvoyage\ticTacToe\ointeger;
 
-use estvoyage\ticTacToe\{ ointeger, ninteger, condition, block };
+use estvoyage\ticTacToe\{ ointeger, ninteger, condition, block, mixed };
 
 class any
 	implements
@@ -12,19 +12,16 @@ class any
 
 	function __construct($value = 0)
 	{
-		(
-			new condition\ifFalseErrorElse(
-				new \typeError('Value should be an integer'),
-				new block\functor(
-					function() use ($value)
-					{
-						$this->value = (int) $value;
-					}
+		(new mixed\comparison\unary\with\integer\type)
+			->conditionForComparisonWithMixedIs(
+				$value,
+				new condition\ifFalseError(
+					new \typeError('Value should be an integer')
 				)
 			)
-		)
-			->nbooleanIs(is_numeric($value) && (int) $value == $value)
 		;
+
+		$this->value = (int) $value;
 	}
 
 	function recipientOfValueOfOIntegerIs(ninteger\recipient $recipient) :void
